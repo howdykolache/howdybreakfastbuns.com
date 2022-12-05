@@ -21,7 +21,7 @@ p {
 }
 
 .btn-primary {
-  background: #fce300;
+  @apply bg-primary;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -30,37 +30,9 @@ p {
   background: transparent;
 }
 
-h1::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 9px;
-  background: #fce300;
-  margin-top: 40px;
-}
-
-.sticky-bar {
-  position: sticky;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 40px;
-  background: #fce300;
-}
-
 .text-highlight {
   color: #00b373;
   font-weight: bold;
-}
-
-footer {
-  background: #f2f2ed;
-}
-
-footer a {
-  margin: 4px 10px;
-  display: inline-block;
-  text-transform: uppercase;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -71,11 +43,5 @@ footer a {
 
   .btn {
     padding: 12px 16px;
-  }
-}
-
-@media only screen and (min-width: 800px) {
-  h1::after {
-    width: 255px;
   }
 }
