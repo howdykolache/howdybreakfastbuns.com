@@ -21,7 +21,7 @@ p {
 }
 
 .btn-primary {
-  @apply bg-primary;
+  @apply bg-primary text-center;
   text-transform: uppercase;
   font-weight: bold;
 }
