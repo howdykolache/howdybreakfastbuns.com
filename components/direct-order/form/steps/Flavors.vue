@@ -10,6 +10,7 @@
         <div>
           <RadioButton
             v-model="flavors"
+            @change="onChange"
             label="Howdy Mix (Most Popular!)"
             sublabel="Our standard recommended assortment with our top flavors. 40% vegetarian to cater to everyone's needs."
             name="flavors"
@@ -17,6 +18,7 @@
           />
           <RadioButton
             v-model="flavors"
+            @change="onChange"
             label="Vegetarian Only"
             sublabel="All vegetarian crowd? Fear not! We've got you covered!"
             name="flavors"
@@ -24,6 +26,7 @@
           />
           <RadioButton
             v-model="flavors"
+            @change="onChange"
             label="Sweet & Savory"
             sublabel="Love our sweet variations like cream cheese and seasonal fruit? This is a 50/50 sweet and savory mix."
             name="flavors"
@@ -31,6 +34,7 @@
           />
           <RadioButton
             v-model="flavors"
+            @change="onChange"
             :force-checked="showCustomFlavorsInput"
             label="Choose My Own"
             sublabel="Select your own flavors (by the dozen)"
@@ -44,6 +48,7 @@
             <textarea
               type="text"
               v-model="flavors"
+              @change="onChange"
               class="mt-1 h-28 w-full border border-gray-400 p-2 focus:border-gray-500 focus:outline-none"
             >
             </textarea>
@@ -59,6 +64,7 @@
 
 <script>
 import RadioButton from "@/components/inputs/RadioButton.vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -66,11 +72,13 @@ export default {
   },
   data() {
     return {
-      pricePerDozen: 59,
       flavors: "Howdy Mix",
     };
   },
   computed: {
+    ...mapGetters({
+      form: "order-form/fields",
+    }),
     showCustomFlavorsInput() {
       if (
         this.flavors.startsWith("Howdy Mix") ||
@@ -82,5 +90,18 @@ export default {
       return true;
     },
   },
+  methods: {
+    ...mapActions({
+      update: "order-form/update",
+    }),
+    onChange() {
+      this.update({
+        flavors: this.flavors
+      });
+    },
+  },
+  mounted(){
+    this.onChange()
+  }
 };
 </script>

@@ -4,6 +4,7 @@
     <input
       v-model="inputValue"
       @input="$emit('input', $event.target.value)"
+      @change="$emit('change')"
       :type="type"
       :class="{'mt-2': label}"
       class="border border-gray-400 p-2 focus:border-gray-500 focus:outline-none"

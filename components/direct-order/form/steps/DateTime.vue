@@ -13,24 +13,49 @@
           >.
         </p>
         <div>
-          <Input label="What date will your order be?" />
-          <Input label="What time would you like your order?" />
+          <Input
+            v-model="fields.date"
+            @change="onChange"
+            label="What date will your order be?"
+          />
+          <Input
+            v-model="fields.deliveryTime"
+            @change="onChange"
+            label="What time would you like your order?"
+          />
           <RadioButton
+            v-model="fields.orderType"
+            @change="onChange"
             label="Pickup"
             sublabel="Pick up at our bakery location at 817 W Fulton for no charge"
             name="deliveryType"
-            content="pickup"
+            content="Pickup"
             class="mt-8"
           />
           <RadioButton
+            v-model="fields.orderType"
+            @change="onChange"
             label="Delivery"
             sublabel="10% of order subtotal, within 5 miles of loop"
             name="deliveryType"
-            content="delivery"
+            content="Delivery"
           />
-          <div class="ml-9">
-            <Input label="Address" class="mt-1" />
-            <Input label="Delivery notes" class="mt-1" />
+          <div
+            v-if="fields.orderType.toLowerCase() === 'delivery'"
+            class="ml-9"
+          >
+            <Input
+              v-model="fields.address"
+              @change="onChange"
+              label="Address"
+              class="mt-1"
+            />
+            <Input
+              v-model="fields.deliveryNotes"
+              @change="onChange"
+              label="Delivery notes"
+              class="mt-1"
+            />
           </div>
         </div>
       </div>
@@ -42,13 +67,43 @@
 </template>
 
 <script>
-import RadioButton from "@/components/inputs/RadioButton.vue";
 import Input from "@/components/inputs/Input.vue";
+import RadioButton from "@/components/inputs/RadioButton";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
-    RadioButton,
     Input,
+    RadioButton,
   },
+  data() {
+    return {
+      fields: {
+        date: null,
+        deliveryTime: null,
+        orderType: "Pickup",
+        address: "",
+        deliveryNotes: "",
+      },
+    };
+  },
+  computed: {
+    ...mapGetters({
+      form: "order-form/fields",
+    }),
+  },
+  methods: {
+    ...mapActions({
+      update: "order-form/update",
+    }),
+    onChange() {
+      this.update({
+        delivery: { ...this.fields },
+      });
+    },
+  },
+  mounted(){
+    this.onChange()
+  }
 };
 </script>

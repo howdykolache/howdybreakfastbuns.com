@@ -6,7 +6,8 @@
         :name="name"
         :value="content"
         :checked="(checked || forceChecked)"
-        @change="$emit('input', $event.target.value)"
+        @input="$emit('input', $event.target.value)"
+        @change="$emit('change')"
       />
     </div>
     <div class="ml-4 flex flex-col">
@@ -45,13 +46,13 @@ export default {
   },
   data() {
     return {
-      checked: this.content === this.value,
+      checked: this.content == this.value,
     };
   },
   watch: {
     value: {
       handler: function (newVal) {
-        this.checked = this.content === newVal;
+        this.checked = this.content == newVal;
       },
     },
   },
