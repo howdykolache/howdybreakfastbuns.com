@@ -1,0 +1,57 @@
+<template>
+  <div>
+    <h4 class="text-center text-lg font-bold lg:text-2xl">ADD-ONS</h4>
+    <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
+      <div class="w-full lg:w-7/12">
+        <div v-for="(addon, key) in addons" :key="key" :class="{ '!mt-6': !addon.description }" class="flex mt-2">
+          <div>
+            <input type="text" v-model="addons[key].value"
+              class="w-9 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none" />
+          </div>
+          <div class="ml-4 flex flex-col">
+            <span class="mt-0.5">{{ addon.name }}</span>
+            <span class="text-gray-400 text-sm">{{ addon.description }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="hidden lg:block">
+        <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      addons: {
+        "chia pudding": {
+          name: "Chia pudding (Vegan/Gluten Free)",
+          description:
+            "Fruit chia pudding that we make in house. Gluten free and vegan. No refined sugars. Contains almond milk.",
+          value: 0,
+        },
+        "coffee carafe": {
+          name: "Coffee carafe ($35)",
+          description: "Coffee carafe, cups, lids, creamer, sweetener for 10 people. Serving Groundswell coffee, one of our favorite local brewers in Chicago.",
+          value: 0,
+        },
+        "tea carafe": {
+          name: "Tea carafe ($35)",
+          description: "Hot water carafe, assorted tea bags, cups for 10 people.",
+          value: 0,
+        },
+        "orange juice": {
+          name: "Orange juice ($4)",
+          value: 0,
+        },
+        "topo chico": {
+          name: "Topo chico ($4)",
+          value: 0,
+        },
+      },
+    };
+  },
+};
+</script>
