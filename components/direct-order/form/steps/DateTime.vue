@@ -22,11 +22,19 @@
               first-day-of-week="mon"
             />
           </div>
-          <Input
-            v-model="fields.deliveryTime"
-            @change="onChange"
-            label="What time would you like your order?"
-          />
+          <div class="time-picker-wrapper mt-4">
+            <label>What time would you like your order?</label>
+            <multiselect
+              v-model="fields.deliveryTime" 
+              :options="availableHours"
+              @select="onHourSelect"
+              label="hour"
+              track-by="hour"
+              placeholder=""
+              tagPosition="bottom"
+              >
+            </multiselect>
+          </div>
           <RadioButton
             v-model="fields.orderType"
             @change="onChange"
@@ -77,12 +85,14 @@ import { mapGetters, mapActions } from "vuex";
 import DatePicker from '@sum.cumo/vue-datepicker'
 import '@sum.cumo/vue-datepicker/dist/Datepicker.css'
 import moment from 'moment'
+import Multiselect from 'vue-multiselect'
 
 export default {
   components: {
     Input,
     RadioButton,
-    DatePicker
+    DatePicker,
+    Multiselect
   },
   data() {
     return {
@@ -103,6 +113,28 @@ export default {
     ...mapGetters({
       form: "order-form/fields",
     }),
+    availableHours () {
+      const format = 'h:mm a'
+      const fromTime = moment('7:30 am', format)
+      const toTime = moment('1:30 pm', format)
+      const hourList = []
+
+      // add the initial start time
+      hourList.push({
+        hour: fromTime.format(format)
+      })
+
+      while (true) {
+        fromTime.add(15, 'minutes')
+        hourList.push({
+          hour: fromTime.format(format)
+        })
+
+        if (fromTime.isSameOrAfter(toTime)) break
+      }
+
+      return hourList
+    }
   },
   methods: {
     ...mapActions({
@@ -119,6 +151,10 @@ export default {
         delivery: { ...this.fields },
       });
     },
+    onHourSelect(obj){
+      this.fields.deliveryTime = obj.hour
+      this.onChange()
+    }
   },
   mounted(){
     this.onChange()
@@ -137,8 +173,20 @@ export default {
 };
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
 <style scoped>
-.date-picker-wrapper >>> input {
+.date-picker-wrapper >>> input,
+.time-picker-wrapper >>> .multiselect__input,
+.time-picker-wrapper >>> .multiselect__tags{
     @apply border border-gray-400 p-2 focus:border-gray-500 focus:outline-none w-full mt-2;
+}
+
+.time-picker-wrapper >>>  .multiselect--active .multiselect__tags {
+    @apply border-none p-0;
+}
+
+.time-picker-wrapper >>>  .multiselect__placeholder {
+    @apply m-0;
 }
 </style>
