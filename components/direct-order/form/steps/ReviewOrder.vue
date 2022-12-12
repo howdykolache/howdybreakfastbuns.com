@@ -8,10 +8,7 @@
           <div class="flex">
             <div class="w-1/2 flex flex-col mt-5">
               <span class="label">DATE & TIME</span>
-              <span class="mt-1"
-                >{{ form.delivery.date }} @
-                {{ form.delivery.deliveryTime }}</span
-              >
+              <span class="mt-1">{{ formattedOrderDatetime }}</span>
             </div>
             <div class="w-1/2 flex flex-col mt-5">
               <span class="label">ORDER TYPE</span>
@@ -105,6 +102,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import moment from 'moment'
 
 export default {
   data() {
@@ -133,6 +131,12 @@ export default {
     total() {
       return this.subtotal + this.tax + this.deliveryCost + Number(this.tip)
     },
+    formattedOrderDatetime(){
+      const date = moment(this.form.delivery.date, 'MM/DD/YYYY').format('MMM DD')
+      const time = moment(this.form.delivery.deliveryTime, 'hh:mm a').format('h:mm a')
+
+      return `${date} @ ${time}`
+    }
   },
   methods: {
     ...mapActions({
