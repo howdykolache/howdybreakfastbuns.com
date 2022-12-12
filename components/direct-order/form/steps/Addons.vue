@@ -13,6 +13,7 @@
             <input
               type="text"
               @change="onChange"
+              @keypress="onQtyInputKeypress"
               v-model="addons[key].value"
               class="w-9 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
             />
@@ -103,6 +104,9 @@ export default {
       this.update({
         addons: this.selectedAddons,
       });
+    },
+    onQtyInputKeypress(e) {
+      if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault()
     },
   },
   mounted(){
