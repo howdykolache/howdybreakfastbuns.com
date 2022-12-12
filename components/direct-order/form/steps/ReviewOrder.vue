@@ -82,6 +82,7 @@
                 <input
                   type="text"
                   v-model="tip"
+                  @keypress="onTipInputKeypress"
                   class="ml-3 w-16 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
                 />
               </div>
@@ -145,6 +146,10 @@ export default {
     ...mapActions({
       update: "order-form/update",
     }),
+    onTipInputKeypress(e) {
+      // Only accept numbers
+      if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault()
+    },
   },
 };
 </script>
