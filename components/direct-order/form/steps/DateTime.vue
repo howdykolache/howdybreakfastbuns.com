@@ -15,7 +15,12 @@
         <div>
           <div class="date-picker-wrapper">
             <label>What date will your order be?</label>
-            <DatePicker v-model="fields.date" @input="onChange" />
+            <DatePicker
+              v-model="fields.date"
+              @input="onChange"
+              :disabled-dates="disabledDates"
+              first-day-of-week="mon"
+            />
           </div>
           <Input
             v-model="fields.deliveryTime"
@@ -88,6 +93,9 @@ export default {
         address: "",
         deliveryNotes: "",
       },
+      disabledDates: {
+        days: [6, 0]
+      }
     };
   },
   computed: {
