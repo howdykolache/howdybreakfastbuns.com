@@ -13,11 +13,10 @@
           >.
         </p>
         <div>
-          <Input
-            v-model="fields.date"
-            @change="onChange"
-            label="What date will your order be?"
-          />
+          <div class="date-picker-wrapper">
+            <label>What date will your order be?</label>
+            <DatePicker v-model="fields.date" @input="onChange" />
+          </div>
           <Input
             v-model="fields.deliveryTime"
             @change="onChange"
@@ -70,11 +69,15 @@
 import Input from "@/components/inputs/Input.vue";
 import RadioButton from "@/components/inputs/RadioButton";
 import { mapGetters, mapActions } from "vuex";
+import DatePicker from '@sum.cumo/vue-datepicker'
+import '@sum.cumo/vue-datepicker/dist/Datepicker.css'
+import moment from 'moment'
 
 export default {
   components: {
     Input,
     RadioButton,
+    DatePicker
   },
   data() {
     return {
@@ -97,6 +100,12 @@ export default {
       update: "order-form/update",
     }),
     onChange() {
+      // format the selected date
+      if (this.fields.date) {
+        const date = moment(this.fields.date).format('MM/DD/2022')
+        this.fields.date = date
+      }
+
       this.update({
         delivery: { ...this.fields },
       });
@@ -107,3 +116,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.date-picker-wrapper >>> input {
+    @apply border border-gray-400 p-2 focus:border-gray-500 focus:outline-none w-full mt-2;
+}
+</style>
