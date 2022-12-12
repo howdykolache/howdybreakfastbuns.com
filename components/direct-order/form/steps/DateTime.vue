@@ -94,7 +94,8 @@ export default {
         deliveryNotes: "",
       },
       disabledDates: {
-        days: [6, 0]
+        days: [6, 0],
+        dates: []
       }
     };
   },
@@ -121,6 +122,17 @@ export default {
   },
   mounted(){
     this.onChange()
+
+    const now = moment()
+    const isFriday = now.day() === 5
+    const orderDeadline = moment('13:00', 'HH:mm')
+
+    // If it’s Friday and it’s 1pm or after, make next Monday unavailable.
+    // Tuesday should be the next available day
+    if (isFriday && now.isSameOrAfter(orderDeadline)) {
+      const nextMondyDate = moment().add(3, 'days').toDate()
+      this.disabledDates.dates.push(nextMondyDate)
+    }
   }
 };
 </script>
