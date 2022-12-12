@@ -2,16 +2,12 @@
   <div class="mt-10">
     <ProgressIndicator v-if="currentStep <= 5" :steps="5" :current-step="currentStep" />
     <div :class="{'mt-6 lg:mt-12': currentStep <= 5}">
-      <ContactInfo v-if="currentStep === 1" />
-      <DateTime v-if="currentStep === 2" />
-      <OrderSize v-if="currentStep === 3" />
-      <Flavors v-if="currentStep === 4" />
-      <Addons v-if="currentStep === 5" />
+      <ContactInfo v-if="currentStep === 1" @next="next" />
+      <DateTime v-if="currentStep === 2" @next="next" />
+      <OrderSize v-if="currentStep === 3" @next="next" />
+      <Flavors v-if="currentStep === 4" @next="next" />
+      <Addons v-if="currentStep === 5" @next="next" />
       <ReviewOrder v-if="currentStep === 6" />
-      <div class="mt-10 lg:w-1/2">
-        <button v-if="currentStep <= 5" @click="currentStep++" class="btn btn-primary w-full p-3">{{ buttonLabel }}</button>
-        <button v-else class="btn btn-primary w-full p-3">PAY</button>
-      </div>
     </div>
   </div>
 </template>
@@ -40,24 +36,9 @@ export default {
       currentStep: 1
     }
   },
-  computed: {
-    buttonLabel () {
-      switch (this.currentStep) {
-        case 1:
-          return 'Next: DATE & TIME'        
-        case 2:
-          return 'Next: ORDER SIZE'
-        case 3:
-          return 'Next: SELECT MIX'
-        case 4:
-          return 'Next: ADD-ONS'
-        case 5:
-          return 'REVIEW'       
-        case 6:
-          return 'PAY'
-        default:
-          break;
-      }
+  methods: {
+    next(){
+      this.currentStep++
     }
   }
 };

@@ -22,6 +22,9 @@
             <span class="text-gray-400 text-sm">{{ addon.description }}</span>
           </div>
         </div>
+        <button @click="$emit('next')" class="btn btn-primary w-full p-3 mt-10">
+          REVIEW
+        </button>
       </div>
       <div class="hidden lg:block">
         <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />

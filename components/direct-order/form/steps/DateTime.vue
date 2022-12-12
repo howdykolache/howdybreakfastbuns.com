@@ -69,6 +69,14 @@
               class="mt-1"
             />
           </div>
+          <button
+            :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+            :disabled="!canProceed"
+            class="btn btn-primary w-full p-3 mt-10"
+            @click="$emit('next')"
+          >
+            Next: ORDER SIZE
+          </button>
         </div>
       </div>
       <div class="hidden lg:block">
@@ -134,6 +142,15 @@ export default {
       }
 
       return hourList
+    },
+    canProceed(){
+      if (!this.fields.date || !this.fields.deliveryTime) return false
+      if (
+        this.fields.orderType.toLowerCase() === 'delivery' &&
+        !this.fields.address.length
+      ) return false
+      
+      return true
     }
   },
   methods: {

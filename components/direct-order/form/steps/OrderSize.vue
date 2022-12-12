@@ -50,6 +50,14 @@
           label="How many dozen would you like?"
         />
         <p>Subtotal: ${{ subtotal }}</p>
+        <button
+          :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+          :disabled="!canProceed"
+          class="btn btn-primary w-full p-3 mt-10"
+          @click="$emit('next')"
+        >
+          Next: SELECT MIX
+        </button>
       </div>
       <div class="hidden lg:block">
         <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
@@ -87,6 +95,9 @@ export default {
     },
     subtotal(){
       return this.fields.dozens * this.pricePerDozen
+    },
+    canProceed(){
+      return this.fields.numberOfPeople && this.fields.dozens
     }
   },
   methods: {

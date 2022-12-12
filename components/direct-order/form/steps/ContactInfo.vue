@@ -17,6 +17,14 @@
           label="What is the best number to text?" 
           sublabel="For notifications on the order date" 
         />
+        <button
+          :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+          :disabled="!canProceed"
+          class="btn btn-primary w-full p-3 mt-10"
+          @click="$emit('next')"
+        >
+          Next: DATE & TIME
+        </button>
       </div>
       <div class="hidden lg:block">
         <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
@@ -45,7 +53,11 @@ export default {
   computed: {
     ...mapGetters({
       form: 'order-form/fields'
-    })
+    }),
+    canProceed(){
+      const { name, email, phoneNumber } = this.fields
+      return name.length && email.length && phoneNumber.length
+    }
   },
   methods: {
     ...mapActions({
