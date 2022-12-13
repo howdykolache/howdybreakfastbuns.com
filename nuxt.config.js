@@ -3,6 +3,10 @@ export default {
   target: 'static',
   ssr: false,
 
+  env: {
+    STRIPE_SECRET_API_KEY: process.env.STRIPE_SECRET_API_KEY,
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'howdybreakfastbuns.com',
@@ -36,6 +40,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxt/postcss8',
+    ['@nuxtjs/dotenv', { systemvars: true }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
