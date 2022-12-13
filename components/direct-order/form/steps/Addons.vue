@@ -46,31 +46,36 @@ export default {
           description:
             "Fruit chia pudding that we make in house. Gluten free and vegan. No refined sugars. Contains almond milk.",
           value: 0,
-          price: 0,
+          priceInCents: 0,
+          id: 1
         },
         "coffee carafe": {
           name: "Coffee carafe ($35)",
           description:
             "Coffee carafe, cups, lids, creamer, sweetener for 10 people. Serving Groundswell coffee, one of our favorite local brewers in Chicago.",
           value: 0,
-          price: 35,
+          priceInCents: 3500,
+          id: 2
         },
         "tea carafe": {
           name: "Tea carafe ($35)",
           description:
             "Hot water carafe, assorted tea bags, cups for 10 people.",
           value: 0,
-          price: 35,
+          priceInCents: 3500,
+          id: 3
         },
         "orange juice": {
           name: "Orange juice ($4)",
           value: 0,
-          price: 4,
+          priceInCents: 400,
+          id: 4
         },
         "topo chico": {
           name: "Topo chico ($4)",
           value: 0,
-          price: 4,
+          priceInCents: 400,
+          id: 5
         },
       },
     };
@@ -87,8 +92,9 @@ export default {
         if (parseInt(addon.value)) {
           res.push({
             name: addon.name,
-            qty: addon.value,
-            price: addon.price,
+            qty: Number(addon.value),
+            priceInCents: addon.priceInCents,
+            id: addon.id,
           });
         }
       }
