@@ -177,14 +177,12 @@ export default {
     this.onChange()
 
     const now = moment()
-    const isFriday = now.day() === 5
     const orderDeadline = moment('13:00', 'HH:mm')
 
-    // If it’s Friday and it’s 1pm or after, make next Monday unavailable.
-    // Tuesday should be the next available day
-    if (isFriday && now.isSameOrAfter(orderDeadline)) {
-      const nextMondyDate = moment().add(3, 'days').toDate()
-      this.disabledDates.dates.push(nextMondyDate)
+    // If it’s 1pm or after, make next day unavailable.
+    if (now.isSameOrAfter(orderDeadline)) {
+      const tomorrow = moment().add(1, 'days').toDate()
+      this.disabledDates.dates.push(tomorrow)
     }
   }
 };
