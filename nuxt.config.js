@@ -9,15 +9,18 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'howdybreakfastbuns.com',
+    title: 'Howdy Breakfast Buns',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: 'Stuffed breakfast sandwiches perfect for offices or events. No mess, fun and delicious!' },
+      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'og:title', name: 'og:title', content: 'Howdy Breakfast Buns' },
+      { hid: 'og:description', name: 'og:description', content: 'Stuffed breakfast sandwiches perfect for offices or events. No mess, fun and delicious!' },
+      { hid: 'og:image', property: 'og:image', content: process.env.BASE_URL + '/thumb.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
