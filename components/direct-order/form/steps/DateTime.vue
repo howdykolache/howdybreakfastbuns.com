@@ -113,7 +113,8 @@ export default {
       },
       disabledDates: {
         days: [6, 0],
-        dates: []
+        dates: [],
+        to: moment().toDate() // Disable past dates
       }
     };
   },
