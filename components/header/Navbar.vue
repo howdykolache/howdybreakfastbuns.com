@@ -8,7 +8,7 @@
       />
     </a>
     <div class="flex items-center">
-      <a href="" class="btn btn-secondary text-xs md:text-sm">FLAVORS</a>
+      <a href="" class="btn btn-secondary text-xs md:text-sm">MENU</a>
       <nuxt-link 
       to="/order" class="btn btn-primary ml-2 text-xs md:text-sm"
       >
