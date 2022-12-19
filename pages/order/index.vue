@@ -29,8 +29,8 @@
     <section
       class="links mt-10 flex flex-col items-center gap-y-6 lg:mt-20 lg:flex-row lg:gap-y-0 lg:gap-x-12"
     >
-      <a href="https://www.toasttab.com/howdykolache/">TOAST</a>
-      <a href="https://www.ezcater.com/catering/howdy-kolache-3">ezCater</a>
+      <a href="https://www.toasttab.com/howdybreakfastbuns/v3">TOAST</a>
+      <a href="https://www.ezcater.com/catering/howdy-breakfast-buns-chicago">ezCater</a>
       <nuxt-link to="/order/direct">Through us directly</nuxt-link>
     </section>
   </main>
