@@ -13,16 +13,28 @@
           >.
         </p>
         <div>
-          <Input
-            v-model="fields.date"
-            @change="onChange"
-            label="What date will your order be?"
-          />
-          <Input
-            v-model="fields.deliveryTime"
-            @change="onChange"
-            label="What time would you like your order?"
-          />
+          <div class="date-picker-wrapper">
+            <label>What date will your order be?</label>
+            <DatePicker
+              v-model="fields.date"
+              @input="onChange"
+              :disabled-dates="disabledDates"
+              first-day-of-week="mon"
+            />
+          </div>
+          <div class="time-picker-wrapper mt-4">
+            <label>What time would you like your order?</label>
+            <multiselect
+              v-model="fields.deliveryTime" 
+              :options="availableHours"
+              @select="onHourSelect"
+              label="hour"
+              track-by="hour"
+              placeholder=""
+              tagPosition="bottom"
+              >
+            </multiselect>
+          </div>
           <RadioButton
             v-model="fields.orderType"
             @change="onChange"
@@ -57,6 +69,14 @@
               class="mt-1"
             />
           </div>
+          <button
+            :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+            :disabled="!canProceed"
+            class="btn btn-primary w-full p-3 mt-10"
+            @click="$emit('next')"
+          >
+            Next: ORDER SIZE
+          </button>
         </div>
       </div>
       <div class="hidden lg:block">
@@ -70,11 +90,17 @@
 import Input from "@/components/inputs/Input.vue";
 import RadioButton from "@/components/inputs/RadioButton";
 import { mapGetters, mapActions } from "vuex";
+import DatePicker from '@sum.cumo/vue-datepicker'
+import '@sum.cumo/vue-datepicker/dist/Datepicker.css'
+import moment from 'moment'
+import Multiselect from 'vue-multiselect'
 
 export default {
   components: {
     Input,
     RadioButton,
+    DatePicker,
+    Multiselect
   },
   data() {
     return {
@@ -85,25 +111,98 @@ export default {
         address: "",
         deliveryNotes: "",
       },
+      disabledDates: {
+        days: [6, 0],
+        dates: [],
+        to: moment().toDate() // Disable past dates
+      }
     };
   },
   computed: {
     ...mapGetters({
       form: "order-form/fields",
     }),
+    availableHours () {
+      const format = 'h:mm a'
+      const fromTime = moment('7:30 am', format)
+      const toTime = moment('1:30 pm', format)
+      const hourList = []
+
+      // add the initial start time
+      hourList.push({
+        hour: fromTime.format(format)
+      })
+
+      while (true) {
+        fromTime.add(15, 'minutes')
+        hourList.push({
+          hour: fromTime.format(format)
+        })
+
+        if (fromTime.isSameOrAfter(toTime)) break
+      }
+
+      return hourList
+    },
+    canProceed(){
+      if (!this.fields.date || !this.fields.deliveryTime) return false
+      if (
+        this.fields.orderType.toLowerCase() === 'delivery' &&
+        !this.fields.address.length
+      ) return false
+      
+      return true
+    }
   },
   methods: {
     ...mapActions({
       update: "order-form/update",
     }),
     onChange() {
+      // format the selected date
+      if (this.fields.date) {
+        const date = moment(this.fields.date).format('MM/DD/2022')
+        this.fields.date = date
+      }
+
       this.update({
         delivery: { ...this.fields },
       });
     },
+    onHourSelect(obj){
+      this.fields.deliveryTime = obj.hour
+      this.onChange()
+    }
   },
   mounted(){
     this.onChange()
+
+    const now = moment()
+    const orderDeadline = moment('13:00', 'HH:mm')
+
+    // If it’s 1pm or after, make next day unavailable.
+    if (now.isSameOrAfter(orderDeadline)) {
+      const tomorrow = moment().add(1, 'days').toDate()
+      this.disabledDates.dates.push(tomorrow)
+    }
   }
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+<style scoped>
+.date-picker-wrapper >>> input,
+.time-picker-wrapper >>> .multiselect__input,
+.time-picker-wrapper >>> .multiselect__tags{
+    @apply border border-gray-400 p-2 focus:border-gray-500 focus:outline-none w-full mt-2;
+}
+
+.time-picker-wrapper >>>  .multiselect--active .multiselect__tags {
+    @apply border-none p-0;
+}
+
+.time-picker-wrapper >>>  .multiselect__placeholder {
+    @apply m-0;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 class="text-center text-lg font-bold lg:text-2xl">
-      ORDER SIZE ( ${{ pricePerDozen }}/dozen)
+      ORDER SIZE ( ${{ pricePerDozenInCents / 100 }}/dozen)
     </h4>
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-7/12">
@@ -49,7 +49,15 @@
           type="number"
           label="How many dozen would you like?"
         />
-        <p>Subtotal: ${{ subtotal }}</p>
+        <p>Subtotal: ${{ subtotal / 100 }}</p>
+        <button
+          :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+          :disabled="!canProceed"
+          class="btn btn-primary w-full p-3 mt-10"
+          @click="$emit('next')"
+        >
+          Next: SELECT MIX
+        </button>
       </div>
       <div class="hidden lg:block">
         <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
@@ -70,7 +78,7 @@ export default {
   },
   data() {
     return {
-      pricePerDozen: 59,
+      pricePerDozenInCents: 5900,
       fields: {
         numberOfPeople: 1,
         bunsPerPerson: 1,
@@ -86,7 +94,10 @@ export default {
       return Math.ceil((this.fields.numberOfPeople * this.fields.bunsPerPerson) / 12)
     },
     subtotal(){
-      return this.fields.dozens * this.pricePerDozen
+      return this.fields.dozens * this.pricePerDozenInCents
+    },
+    canProceed(){
+      return this.fields.numberOfPeople && this.fields.dozens
     }
   },
   methods: {
@@ -97,7 +108,7 @@ export default {
       this.update({
         size: { 
           ...this.fields,
-          subtotal: this.subtotal
+          kolachesCostInCents: this.subtotal
         },
       });
     },

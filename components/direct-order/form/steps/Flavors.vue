@@ -53,6 +53,14 @@
             >
             </textarea>
           </div>
+          <button
+            :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+            :disabled="!canProceed"
+            class="btn btn-primary w-full p-3 mt-10"
+            @click="$emit('next')"
+          >
+            Next: ADD-ONS
+          </button>
         </div>
       </div>
       <div class="hidden lg:block">
@@ -89,6 +97,9 @@ export default {
 
       return true;
     },
+    canProceed(){
+      return this.flavors.length
+    }
   },
   methods: {
     ...mapActions({

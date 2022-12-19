@@ -3,17 +3,24 @@ export default {
   target: 'static',
   ssr: false,
 
+  env: {
+    STRIPE_SECRET_API_KEY: process.env.STRIPE_SECRET_API_KEY,
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'howdybreakfastbuns.com',
+    title: 'Howdy Breakfast Buns',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: 'Stuffed breakfast sandwiches perfect for offices or events. No mess, fun and delicious!' },
+      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'og:title', name: 'og:title', content: 'Howdy Breakfast Buns' },
+      { hid: 'og:description', name: 'og:description', content: 'Stuffed breakfast sandwiches perfect for offices or events. No mess, fun and delicious!' },
+      { hid: 'og:image', property: 'og:image', content: process.env.BASE_URL + '/thumb.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -36,6 +43,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxt/postcss8',
+    ['@nuxtjs/dotenv', { systemvars: true }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
