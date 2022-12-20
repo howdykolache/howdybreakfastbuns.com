@@ -41,7 +41,7 @@
         </div>
         <p>
           Howdy Breakfast Buns by the dozen. Based on your preferences, we
-          recommend around {{ recommendedDozens }} dozen.
+          recommend around <span class="text-highlight font-bold">{{ recommendedDozens }} dozen</span>.
         </p>
         <Input
           v-model="fields.dozens"
