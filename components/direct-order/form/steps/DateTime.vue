@@ -195,7 +195,7 @@ export default {
 .date-picker-wrapper >>> input,
 .time-picker-wrapper >>> .multiselect__input,
 .time-picker-wrapper >>> .multiselect__tags{
-    @apply border border-gray-400 p-2 focus:border-gray-500 focus:outline-none w-full mt-2;
+    @apply border border-gray-400 p-2 focus:border-primary focus:outline-none w-full mt-2;
 }
 
 .time-picker-wrapper >>>  .multiselect--active .multiselect__tags {
