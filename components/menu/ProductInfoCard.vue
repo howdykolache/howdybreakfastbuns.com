@@ -1,6 +1,6 @@
 <template>
-  <div class="item-card flex border border-primary p-2 mt-5">
-    <div class="w-4/12 flex flex-col items-center">
+  <div class="item-card border border-primary p-2 mt-5 md:flex">
+    <div class="flex flex-col items-center md:w-4/12">
       <div>
         <img
         :src="image"
@@ -62,11 +62,17 @@ export default {
 
 <style>
 .item-card{
-    width: 49%;
+    width: 100%;
 }
 
 .highlighted-ingredient {
   color: #E56A54;
   font-weight: bold;
+}
+
+@media only screen and (min-width: 1024px) {
+  .item-card{
+    width: 49%;
+  }
 }
 </style>
