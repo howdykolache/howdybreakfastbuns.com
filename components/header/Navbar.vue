@@ -8,6 +8,7 @@
       />
     </a>
     <div class="flex items-center">
+      <nuxt-link to="/employee-perks" class="btn btn-secondary text-xs md:text-sm">EMPLOYEE PERKS</nuxt-link >
       <nuxt-link to="/menu" class="btn btn-secondary text-xs md:text-sm">MENU</nuxt-link >
       <nuxt-link 
       to="/order" class="btn btn-primary ml-2 text-xs md:text-sm"
