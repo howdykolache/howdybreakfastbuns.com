@@ -2,14 +2,15 @@
   <div>
     <h4 class="text-center text-lg font-bold lg:text-2xl">ADD-ONS</h4>
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
-      <div class="w-full lg:w-7/12">
+      <div class="w-full lg:w-8/12">
         <div
           v-for="(addon, key) in addons"
           :key="key"
           :class="{ '!mt-6': !addon.description }"
-          class="flex mt-2"
+          class="flex items-start mt-2"
         >
-          <div>
+          <div  class="w-2/12 flex justify-between items-center">
+            <img src="~/assets/icons/minus.svg" @click="decrementAddonQty(key)" class="w-6 cursor-pointer" />
             <input
               type="text"
               @change="onChange"
@@ -17,8 +18,9 @@
               v-model="addons[key].value"
               class="w-9 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
             />
+            <img src="~/assets/icons/plus.svg" @click="incrementAddonQty(key)" class="w-6 cursor-pointer" />
           </div>
-          <div class="ml-4 flex flex-col">
+          <div class="w-10/12 ml-4 flex flex-col">
             <span class="mt-0.5">{{ addon.name }}</span>
             <span class="text-gray-400 text-sm">{{ addon.description }}</span>
           </div>
@@ -110,6 +112,16 @@ export default {
       this.update({
         addons: this.selectedAddons,
       });
+    },
+    incrementAddonQty(key){
+      this.addons[key].value++
+      this.onChange()
+    },
+    decrementAddonQty(key){
+      if (!this.addons[key].value) return
+
+      this.addons[key].value--
+      this.onChange()
     },
     onQtyInputKeypress(e) {
       if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault()
