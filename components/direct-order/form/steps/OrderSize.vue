@@ -16,7 +16,7 @@
           <RadioButton
             v-model="fields.bunsPerPerson"
             @change="onChange"
-            label="Light (1/person)"
+            label="Light (1 per person)"
             sublabel="Casual. Just a light breakfast. Some might not eat, but others might have an extra bite."
             name="bunsPerPerson"
             content="1"
@@ -25,7 +25,7 @@
           <RadioButton
             v-model="fields.bunsPerPerson"
             @change="onChange"
-            label="Medium (2/person)"
+            label="Medium (2 per person)"
             sublabel="Solid. This is about as much for a sit down breakfast per person."
             name="bunsPerPerson"
             content="2"
@@ -33,7 +33,7 @@
           <RadioButton
             v-model="fields.bunsPerPerson"
             @change="onChange"
-            label="Hungry (3/person)"
+            label="Hungry (3 per person)"
             sublabel="Big eaters. These folks are going to eat!"
             name="bunsPerPerson"
             content="3"
