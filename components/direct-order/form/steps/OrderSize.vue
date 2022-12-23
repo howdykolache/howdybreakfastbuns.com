@@ -40,8 +40,9 @@
           />
         </div>
         <p>
-          Howdy Breakfast Buns by the dozen. Based on your preferences, we
-          recommend around <span class="text-highlight font-bold">{{ recommendedDozens }} dozen</span>.
+          Based on your preferences, we recommend
+          <span class="text-highlight font-bold">{{ recommendedDozens }} dozen</span>
+          breakfast buns (we sell by the dozen).
         </p>
         <Input
           v-model="fields.dozens"
@@ -49,7 +50,7 @@
           type="number"
           label="How many dozen would you like?"
         />
-        <p>Subtotal: ${{ subtotal / 100 }}</p>
+        <p><span class="text-highlight font-bold">Subtotal: ${{ subtotal / 100 }}</span></p>
         <button
           :class="{'opacity-60 cursor-not-allowed': !canProceed}"
           :disabled="!canProceed"
