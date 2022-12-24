@@ -19,7 +19,7 @@
               v-model="fields.date"
               @input="onChange"
               :disabled-dates="disabledDates"
-              first-day-of-week="mon"
+              first-day-of-week="sun"
             />
           </div>
           <div class="time-picker-wrapper mt-4">
