@@ -4,7 +4,9 @@
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-7/12">
         <p>Let's get started with some basic info for the order</p>
-        <Input v-model="fields.name" @change="onChange" label="What is your name?" />
+        <Input v-model="fields.name" @change="onChange">
+          What is your <span class="text-highlight">name</span>?
+        </Input>
         <Input
           v-model="fields.email"
           @change="onChange"
