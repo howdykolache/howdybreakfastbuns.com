@@ -40,10 +40,10 @@
             content="3"
           />
         </div>
-        <section id='orderSizeRecommendation' v-if='canProceed'>
+        <section id='orderSizeRecommendation' v-if="showRecommendation">
           <p>
-            Based on your preferences, we recommend
-            <span class="text-highlight font-bold">{{ recommendedDozens }} dozen</span>
+            Based on your preferences,
+            <span class="text-highlight font-bold">we recommend {{ recommendedDozens }} dozen</span>
             breakfast buns (we sell by the dozen).
           </p>
           <Input
@@ -84,9 +84,9 @@ export default {
     return {
       pricePerDozenInCents: 5900,
       fields: {
-        numberOfPeople: 1,
-        bunsPerPerson: 1,
-        dozens: 1,
+        numberOfPeople: null,
+        bunsPerPerson: null,
+        dozens: null,
       },
     };
   },
@@ -100,8 +100,11 @@ export default {
     subtotal(){
       return this.fields.dozens * this.pricePerDozenInCents
     },
+    showRecommendation() {
+      return this.fields.numberOfPeople && this.fields.bunsPerPerson
+    },
     canProceed(){
-      return this.fields.numberOfPeople && this.fields.dozens
+      return this.fields.dozens
     }
   },
   methods: {
