@@ -9,10 +9,11 @@
           v-model="fields.numberOfPeople"
           @change="onChange"
           type="number"
-          label="About how many people are we feeding?"
-        />
+        >
+        How many <span class="text-highlight">people</span> are you feeding?
+        </Input>
         <div class="mt-6">
-          <label>What kind of eaters are we?</label>
+          <label>What kind of <span class="text-highlight">appetite</span> are you expecting?</label>
           <RadioButton
             v-model="fields.bunsPerPerson"
             @change="onChange"
