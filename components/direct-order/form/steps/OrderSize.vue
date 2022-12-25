@@ -40,18 +40,20 @@
             content="3"
           />
         </div>
-        <p>
-          Based on your preferences, we recommend
-          <span class="text-highlight font-bold">{{ recommendedDozens }} dozen</span>
-          breakfast buns (we sell by the dozen).
-        </p>
-        <Input
-          v-model="fields.dozens"
-          @change="onChange"
-          type="number"
-          label="How many dozen would you like?"
-        />
-        <p><span class="text-highlight font-bold">Subtotal: ${{ subtotal / 100 }}</span></p>
+        <section id='orderSizeRecommendation' v-if='canProceed'>
+          <p>
+            Based on your preferences, we recommend
+            <span class="text-highlight font-bold">{{ recommendedDozens }} dozen</span>
+            breakfast buns (we sell by the dozen).
+          </p>
+          <Input
+            v-model="fields.dozens"
+            @change="onChange"
+            type="number"
+            label="How many dozen would you like? ($59/dozen)"
+          />
+          <p><span class="text-highlight font-bold">Subtotal: ${{ subtotal / 100 }}</span></p>
+        </section>
         <button
           :class="{'opacity-60 cursor-not-allowed': !canProceed}"
           :disabled="!canProceed"
