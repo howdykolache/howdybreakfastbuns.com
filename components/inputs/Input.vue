@@ -36,7 +36,7 @@ export default {
   computed: {
     hasLabelSlot() {
       // slot is used and has a value
-      return this.$slots.default && !!this.$slots.default[0].text.length
+      return this.$slots.default && this.$slots.default[0].text.length
     }
   },
   data() {
