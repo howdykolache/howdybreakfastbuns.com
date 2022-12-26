@@ -40,25 +40,25 @@
         <a
           href="https://www.nbcchicago.com/entertainment/chicago-today/howdy-kolache-you-can-finally-try-these-savory-texas-czech-style-kolaches-in-chicago/2767128/"
         >
-          <img src="~/assets/img/nbc.png" class="w-32" />
+          <img src="~/assets/img/nbc.png" class="w-20 lg:w-32" />
         </a>
         <a
           class="mt-10 md:mt-0"
           href="https://chicago.eater.com/2022/10/18/23409216/howdy-kolache-texas-czech-pastry-fulton-market-chicago"
         >
-          <img src="~/assets/img/eater.png" class="w-32" />
+          <img src="~/assets/img/eater.png" class="w-20 lg:w-32" />
         </a>
         <a
           class="mt-16 md:mt-0"
           href="https://www.chicagomag.com/chicago-magazine/november-2021/howdy-kolache-bring-a-texas-tradition-north/"
         >
-          <img src="~/assets/img/chicago-mag.png" class="w-48" />
+          <img src="~/assets/img/chicago-mag.png" class="w-28 lg:w-48" />
         </a>
         <a
           class="mt-10 md:mt-0"
           href="https://abc7chicago.com/howdy-kolache-chicago-bakery-west-loop-restaurants/11224703/"
         >
-          <img src="~/assets/img/abc.png" class="w-28" />
+          <img src="~/assets/img/abc.png" class="w-16 lg:w-28" />
         </a>
       </div>
     </section>
