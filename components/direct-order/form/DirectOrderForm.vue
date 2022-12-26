@@ -5,11 +5,11 @@
       <p v-if="error" class="text-center text-red-500 my-4">Something went wrong, please try again later</p>
       <div :class="{'mt-6 lg:mt-12': currentStep <= 5}">
         <ContactInfo v-if="currentStep === 1" @next="next" />
-        <DateTime v-if="currentStep === 2" @next="next" />
-        <OrderSize v-if="currentStep === 3" @next="next" />
-        <Flavors v-if="currentStep === 4" @next="next" />
-        <Addons v-if="currentStep === 5" @next="next" />
-        <ReviewOrder v-if="currentStep === 6" @submit="onSubmit" />
+        <DateTime v-if="currentStep === 2" @next="next" @previous="goBackToPreviousStep" />
+        <OrderSize v-if="currentStep === 3" @next="next" @previous="goBackToPreviousStep" />
+        <Flavors v-if="currentStep === 4" @next="next" @previous="goBackToPreviousStep" />
+        <Addons v-if="currentStep === 5" @next="next" @previous="goBackToPreviousStep" />
+        <ReviewOrder v-if="currentStep === 6" @submit="onSubmit" @previous="goBackToPreviousStep" />
       </div>
     </div>
     <div v-else class="flex justify-center items-center h-screen">
@@ -69,6 +69,9 @@ export default {
   methods: {
     next(){
       this.currentStep++
+    },
+    goBackToPreviousStep(){
+      if (this.currentStep > 1) this.currentStep--
     },
     async onSubmit(){
       this.submitting = true

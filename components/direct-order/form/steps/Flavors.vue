@@ -61,6 +61,9 @@
           >
             Next: ADD-ONS
           </button>
+          <button class="btn btn-secondary w-full p-3 mt-2 underline" @click="$emit('previous')">
+            Previous step
+          </button>
         </div>
       </div>
       <div class="hidden lg:block">
