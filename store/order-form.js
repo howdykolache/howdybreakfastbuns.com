@@ -1,5 +1,26 @@
 export const state = () => ({
-  fields: {},
+  fields: {
+    contact: {
+      name: '',
+      email: '',
+      phoneNumber: '',
+    },
+    delivery: {
+      date: null,
+      deliveryTime: null,
+      orderType: "Pickup",
+      address: '',
+      deliveryNotes: '',
+    },
+    flavors: '',
+    size: {
+      numberOfPeople: 1,
+      bunsPerPerson: 1,
+      dozens: 1,
+      kolachesCostInCents: 5900
+    },
+    addons: []
+  },
 });
 
 export const mutations = {
