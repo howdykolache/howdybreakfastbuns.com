@@ -4,12 +4,12 @@
       <ProgressIndicator v-if="currentStep <= 5" :steps="5" :current-step="currentStep" />
       <p v-if="error" class="text-center text-red-500 my-4">Something went wrong, please try again later</p>
       <div :class="{'mt-6 lg:mt-12': currentStep <= 5}">
-        <ContactInfo v-if="currentStep === 1" @next="next" />
-        <DateTime v-if="currentStep === 2" @next="next" @previous="goBackToPreviousStep" />
-        <OrderSize v-if="currentStep === 3" @next="next" @previous="goBackToPreviousStep" />
-        <Flavors v-if="currentStep === 4" @next="next" @previous="goBackToPreviousStep" />
-        <Addons v-if="currentStep === 5" @next="next" @previous="goBackToPreviousStep" />
-        <ReviewOrder v-if="currentStep === 6" @submit="onSubmit" @previous="goBackToPreviousStep" />
+        <ContactInfo v-show="currentStep === 1" @next="next" />
+        <DateTime v-show="currentStep === 2" @next="next" @previous="goBackToPreviousStep" />
+        <OrderSize v-show="currentStep === 3" @next="next" @previous="goBackToPreviousStep" />
+        <Flavors v-show="currentStep === 4" @next="next" @previous="goBackToPreviousStep" />
+        <Addons v-show="currentStep === 5" @next="next" @previous="goBackToPreviousStep" />
+        <ReviewOrder v-show="currentStep === 6" @submit="onSubmit" @previous="goBackToPreviousStep" />
       </div>
     </div>
     <div v-else class="flex justify-center items-center h-screen">
