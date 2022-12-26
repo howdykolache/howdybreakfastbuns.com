@@ -9,14 +9,15 @@
           v-model="fields.numberOfPeople"
           @change="onChange"
           type="number"
-          label="About how many people are we feeding?"
-        />
+        >
+        How many <span class="text-highlight">people</span> are you feeding?
+        </Input>
         <div class="mt-6">
-          <label>What kind of eaters are we?</label>
+          <label>What kind of <span class="text-highlight">appetite</span> are you expecting?</label>
           <RadioButton
             v-model="fields.bunsPerPerson"
             @change="onChange"
-            label="Light (1/person)"
+            label="Light (1 per person)"
             sublabel="Casual. Just a light breakfast. Some might not eat, but others might have an extra bite."
             name="bunsPerPerson"
             content="1"
@@ -25,7 +26,7 @@
           <RadioButton
             v-model="fields.bunsPerPerson"
             @change="onChange"
-            label="Medium (2/person)"
+            label="Medium (2 per person)"
             sublabel="Solid. This is about as much for a sit down breakfast per person."
             name="bunsPerPerson"
             content="2"
@@ -33,23 +34,26 @@
           <RadioButton
             v-model="fields.bunsPerPerson"
             @change="onChange"
-            label="Hungry (3/person)"
+            label="Hungry (3 per person)"
             sublabel="Big eaters. These folks are going to eat!"
             name="bunsPerPerson"
             content="3"
           />
         </div>
-        <p>
-          Howdy Breakfast Buns by the dozen. Based on your preferences, we
-          recommend around <span class="text-highlight font-bold">{{ recommendedDozens }} dozen</span>.
-        </p>
-        <Input
-          v-model="fields.dozens"
-          @change="onChange"
-          type="number"
-          label="How many dozen would you like?"
-        />
-        <p>Subtotal: ${{ subtotal / 100 }}</p>
+        <section id='orderSizeRecommendation' v-if="showRecommendation">
+          <p>
+            Based on your preferences,
+            <span class="text-highlight font-bold">we recommend {{ recommendedDozens }} dozen</span>
+            breakfast buns (we sell by the dozen).
+          </p>
+          <Input
+            v-model="fields.dozens"
+            @change="onChange"
+            type="number"
+            label="How many dozen would you like? ($59/dozen)"
+          />
+          <p><span class="text-highlight font-bold">Subtotal: ${{ subtotal / 100 }}</span></p>
+        </section>
         <button
           :class="{'opacity-60 cursor-not-allowed': !canProceed}"
           :disabled="!canProceed"
@@ -80,9 +84,9 @@ export default {
     return {
       pricePerDozenInCents: 5900,
       fields: {
-        numberOfPeople: 1,
-        bunsPerPerson: 1,
-        dozens: 1,
+        numberOfPeople: null,
+        bunsPerPerson: null,
+        dozens: null,
       },
     };
   },
@@ -96,8 +100,11 @@ export default {
     subtotal(){
       return this.fields.dozens * this.pricePerDozenInCents
     },
+    showRecommendation() {
+      return this.fields.numberOfPeople && this.fields.bunsPerPerson
+    },
     canProceed(){
-      return this.fields.numberOfPeople && this.fields.dozens
+      return this.fields.dozens
     }
   },
   methods: {

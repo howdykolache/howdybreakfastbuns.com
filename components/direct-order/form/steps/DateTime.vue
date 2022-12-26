@@ -19,7 +19,7 @@
               v-model="fields.date"
               @input="onChange"
               :disabled-dates="disabledDates"
-              first-day-of-week="mon"
+              first-day-of-week="sun"
             />
           </div>
           <div class="time-picker-wrapper mt-4">
@@ -113,7 +113,15 @@ export default {
       },
       disabledDates: {
         days: [6, 0],
-        dates: [],
+        ranges: [
+          { // howdy winter holiday
+            from: new Date(2022, 11, 21),
+            to: new Date(2023, 0, 4)
+          }
+        ],
+        dates: [
+          new Date(2023, 0, 16) // MLK day
+        ],
         to: moment().toDate() // Disable past dates
       }
     };

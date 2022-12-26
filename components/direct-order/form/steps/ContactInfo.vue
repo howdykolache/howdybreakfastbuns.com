@@ -4,19 +4,23 @@
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-7/12">
         <p>Let's get started with some basic info for the order</p>
-        <Input v-model="fields.name" @change="onChange" label="What is your name?" />
+        <Input v-model="fields.name" @change="onChange">
+          What is your <span class="text-highlight">name</span>?
+        </Input>
         <Input
           v-model="fields.email"
           @change="onChange"
-          label="What is your email address?" 
-          sublabel="For sending receipts or confirmations" type="email" 
-        />
-        <Input 
+          sublabel="For sending receipts or confirmations" type="email"
+        >
+          What is your <span class="text-highlight">email address</span>?
+        </Input>
+        <Input
           v-model="fields.phoneNumber"
           @change="onChange"
-          label="What is the best number to text?" 
-          sublabel="For notifications on the order date" 
-        />
+          sublabel="For text message notifications on the order date"
+        >
+          What is the best <span class="text-highlight">cell phone number</span> to text?
+        </Input>
         <button
           :class="{'opacity-60 cursor-not-allowed': !canProceed}"
           :disabled="!canProceed"

@@ -1,12 +1,11 @@
 <template>
   <div class="flex flex-col mt-4">
-    <label v-if="label">{{ label }}</label>
+    <label v-if="label || hasLabelSlot" class="mb-2"><slot>{{ label }}</slot></label>
     <input
       v-model="inputValue"
       @input="$emit('input', $event.target.value)"
       @change="$emit('change')"
       :type="type"
-      :class="{'mt-2': label}"
       class="border border-gray-400 p-2 focus:border-gray-500 focus:outline-none"
     />
     <span v-if="sublabel" class="text-sm text-gray-400 mt-1">{{
@@ -33,6 +32,12 @@ export default {
     value: {
       required: false,
     },
+  },
+  computed: {
+    hasLabelSlot() {
+      // slot is used and has a value
+      return this.$slots.default && this.$slots.default[0].text.length
+    }
   },
   data() {
     return {
