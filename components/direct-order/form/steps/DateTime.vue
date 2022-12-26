@@ -172,7 +172,7 @@ export default {
     onChange() {
       // format the selected date
       if (this.fields.date) {
-        const date = moment(this.fields.date).format('MM/DD/2022')
+        const date = moment(this.fields.date).format('MM/DD/YYYY')
         this.fields.date = date
       }
 
