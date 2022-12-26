@@ -1,7 +1,12 @@
 <template>
   <div class="mt-10">
     <div v-if="!submitting">
-      <ProgressIndicator v-if="currentStep <= 5" :steps="5" :current-step="currentStep" />
+      <ProgressIndicator 
+        v-if="currentStep <= 5" 
+        :steps="5" 
+        :current-step="currentStep" 
+        @select="setCurrentStep"
+      />
       <p v-if="error" class="text-center text-red-500 my-4">Something went wrong, please try again later</p>
       <div :class="{'mt-6 lg:mt-12': currentStep <= 5}">
         <ContactInfo v-show="currentStep === 1" @next="next" />
@@ -72,6 +77,9 @@ export default {
     },
     goBackToPreviousStep(){
       if (this.currentStep > 1) this.currentStep--
+    },
+    setCurrentStep(stepNum){
+      this.currentStep = stepNum
     },
     async onSubmit(){
       this.submitting = true

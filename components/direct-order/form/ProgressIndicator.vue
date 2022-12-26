@@ -1,6 +1,13 @@
 <template>
     <div class="relative w-9/12 mx-auto flex items-center justify-between lg:w-4/12">
-        <div v-for="step in steps" :key="step" :class="{selected: step <= currentStep}" class="step"></div>
+        <div 
+            v-for="step in steps" 
+            :key="step" 
+            @click="onSelect(step)"
+            :class="{selected: step <= currentStep, 'cursor-pointer': isStepSelectable(step)}" 
+            class="step"
+            >
+        </div>
         <div class="crossline progress" :style="{ '--step-index': currentStep - 1 }">
         </div>
         <div class="crossline"></div>
@@ -18,6 +25,16 @@ export default {
             required: true,
             type: Number
         },
+    },
+    methods: {
+        isStepSelectable(step){
+            return step < this.currentStep // We can only go back to preceding steps
+        },
+        onSelect(step){
+            if (!this.isStepSelectable(step)) return
+
+            this.$emit('select', step)
+        }
     }
 }
 </script>
