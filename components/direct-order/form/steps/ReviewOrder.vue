@@ -44,7 +44,7 @@
             <div class="flex items-center">
               <strong class="w-10 text-sm">{{ form.size.dozens }}</strong>
               <span>Howdy Breakfast Buns (dozen)</span>
-              <span class="flex-1 text-right">${{ form.size.kolachesCostInCents / 100 }}</span>
+              <span class="flex-1 text-right">${{ (form.size.kolachesCostInCents / 100).toLocaleString() }}</span>
             </div>
             <span class="ml-10 text-gray-500 text-sm">{{ form.flavors }}</span>
           </div>
@@ -54,7 +54,7 @@
               <strong class="w-10 text-sm">{{ addon.qty }}</strong>
               <span>{{ addon.name }}</span>
               <span class="flex-1 text-right"
-                >${{ (addon.qty * addon.priceInCents) / 100 }}</span
+                >${{ ((addon.qty * addon.priceInCents) / 100).toLocaleString() }}</span
               >
             </div>
           </div>
@@ -62,7 +62,7 @@
           <div class="ml-10 mt-10">
             <div class="flex justify-between mt-2">
               <span>Subtotal</span>
-              <span>${{ subtotal / 100}}</span>
+              <span>${{ (subtotal / 100).toLocaleString() }}</span>
             </div>
             <div class="flex justify-between mt-2">
               <span>Taxes</span>
