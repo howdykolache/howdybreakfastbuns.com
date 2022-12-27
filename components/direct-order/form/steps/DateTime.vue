@@ -16,6 +16,7 @@
           <div class="date-picker-wrapper">
             <label>What date will your order be?</label>
             <DatePicker
+              ref='datepicker'
               v-model="fields.date"
               @input="onChange"
               :disabled-dates="disabledDates"
@@ -187,6 +188,9 @@ export default {
   },
   mounted(){
     this.onChange()
+    setTimeout(() => {
+        this.$refs.datepicker.open()
+    }, 1000)
 
     const now = moment()
     const orderDeadline = moment('13:00', 'HH:mm')
