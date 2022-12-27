@@ -58,12 +58,18 @@
               >
             </div>
           </div>
-          <!-- Subtotal -->
-          <div class="ml-10 mt-10">
+
+          <!-- Subtotal / Tax / Tip -->
+          <div class="mt-10">
+            <!-- Subtotal -->
             <div class="flex justify-between mt-2">
               <span>Subtotal</span>
               <span>${{ (subtotal / 100).toLocaleString() }}</span>
             </div>
+
+            <hr class="my-2">
+
+            <!-- Tax -->
             <div class="flex justify-between mt-2">
               <span>Taxes</span>
               <span>${{ (tax / 100).toLocaleString() }}</span>
@@ -75,6 +81,8 @@
               <span>Delivery (10%)</span>
               <span>${{ (deliveryCost / 100).toLocaleString() }}</span>
             </div>
+
+            <!-- Tip -->
             <div class="flex justify-between mt-2">
               <div>
                 <span class="mr-4">
@@ -120,6 +128,8 @@
                 />
               </div>
             </div>
+
+            <!-- total -->
             <div class="flex justify-between mt-8">
               <strong>Total</strong>
               <strong>${{ (total / 100).toLocaleString() }}</strong>
@@ -127,7 +137,7 @@
           </div>
         </section>
         <button @click="$emit('submit')" class="btn btn-primary w-full p-3 mt-10">
-          PAY
+          PAY ${{ (total / 100).toLocaleString() }}
         </button>
         <button class="btn btn-secondary w-full p-3 mt-2 underline" @click="$emit('previous')">
           Previous step
