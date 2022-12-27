@@ -52,7 +52,7 @@
             type="number"
             label="How many dozen would you like? ($59/dozen)"
           />
-          <p><span class="text-highlight font-bold">Subtotal: ${{ subtotal / 100 }}</span></p>
+          <p><span class="text-highlight font-bold">Subtotal: ${{ (subtotal / 100).toLocaleString() }}</span></p>
         </section>
         <button
           :class="{'opacity-60 cursor-not-allowed': !canProceed}"

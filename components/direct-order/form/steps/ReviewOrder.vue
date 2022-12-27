@@ -66,14 +66,14 @@
             </div>
             <div class="flex justify-between mt-2">
               <span>Taxes</span>
-              <span>${{ tax / 100 }}</span>
+              <span>${{ (tax / 100).toLocaleString() }}</span>
             </div>
             <div
               v-if="form.delivery.orderType.toLowerCase() === 'delivery'"
               class="flex justify-between mt-2"
             >
               <span>Delivery (10%)</span>
-              <span>${{ deliveryCost / 100}}</span>
+              <span>${{ (deliveryCost / 100).toLocaleString() }}</span>
             </div>
             <div class="flex justify-between mt-2">
               <span>Tip</span>
@@ -90,7 +90,7 @@
             </div>
             <div class="flex justify-between mt-8">
               <strong>Total</strong>
-              <strong>${{ total / 100 }}</strong>
+              <strong>${{ (total / 100).toLocaleString() }}</strong>
             </div>
           </div>
         </section>
