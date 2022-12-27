@@ -103,6 +103,7 @@
                 </button>
                 <button
                   @click="clearTip"
+                  v-show="this.tip != 0"
                   class="text-sm text-gray-400 pl-4"
                 >
                   clear
