@@ -76,7 +76,38 @@
               <span>${{ (deliveryCost / 100).toLocaleString() }}</span>
             </div>
             <div class="flex justify-between mt-2">
-              <span>Tip</span>
+              <div>
+                <span class="mr-4">
+                  Tip
+                </span>
+                <button
+                  class="tip-button"
+                  :class="{active: tipPercentEquals(10)}"
+                  @click="onTipButtonClicked(10, $event)"
+                >
+                  10%
+                </button>
+                <button
+                  class="tip-button"
+                  :class="{active: tipPercentEquals(20)}"
+                  @click="onTipButtonClicked(20, $event)"
+                >
+                  20%
+                </button>
+                <button
+                  class="tip-button"
+                  :class="{active: tipPercentEquals(30)}"
+                  @click="onTipButtonClicked(30, $event)"
+                >
+                  30%
+                </button>
+                <button
+                  @click="clearTip"
+                  class="text-sm text-gray-400 pl-4"
+                >
+                  clear
+                </button>
+              </div>
               <div class="flex items-center">
                 <span>$</span>
                 <input
@@ -153,9 +184,22 @@ export default {
     ...mapActions({
       update: "order-form/update",
     }),
+    onTipButtonClicked(pct, e) {
+      let newTipInCents = (pct/100) * this.subtotal
+      this.tip = Math.round(newTipInCents) / 100
+      this.onTipChange()
+    },
+    tipPercentEquals(pct) {
+      // return true if the amount in the tip input equals approximately the argument percent amount
+      let computedTip  = (pct / 100) * this.subtotal
+      return Math.abs(computedTip - this.tipInCents) < 100
+    },
+    clearTip() {
+      this.tip = 0
+      this.onTipChange()
+    },
     onTipInputKeypress(e) {
       // Only accept numbers and period for decimal (46)
-      console.log(e.charCode)
       if (!((e.charCode >= 48 && e.charCode <= 57) || e.charCode == 46)) e.preventDefault()
     },
     onTipChange(){
@@ -170,5 +214,15 @@ export default {
 <style scoped>
 .label {
   @apply text-xs text-highlight !font-normal uppercase;
+}
+
+button.tip-button {
+  font-size: 0.8em;
+  border-radius: 5px;
+  padding: 0em 1em;
+}
+
+button.tip-button.active {
+  @apply bg-primary;
 }
 </style>
