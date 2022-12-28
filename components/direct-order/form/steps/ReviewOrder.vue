@@ -129,6 +129,8 @@
               </div>
             </div>
 
+            <hr class="my-2">
+
             <!-- total -->
             <div class="flex justify-between mt-8">
               <strong>Total</strong>
@@ -228,6 +230,7 @@ export default {
 }
 
 button.tip-button {
+  border: 1px solid rgb(252, 227, 0);
   font-size: 0.8em;
   border-radius: 5px;
   padding: 0em 1em;
