@@ -28,9 +28,8 @@
             <multiselect
               v-model="fields.deliveryTime" 
               :options="availableHours"
-              @select="onHourSelect"
-              label="hour"
-              track-by="hour"
+              :show-labels="false"
+              @input="onChange"
               placeholder=""
               tagPosition="bottom"
               >
@@ -141,15 +140,11 @@ export default {
       const hourList = []
 
       // add the initial start time
-      hourList.push({
-        hour: fromTime.format(format)
-      })
+      hourList.push(fromTime.format(format))
 
       while (true) {
         fromTime.add(15, 'minutes')
-        hourList.push({
-          hour: fromTime.format(format)
-        })
+        hourList.push(fromTime.format(format))
 
         if (fromTime.isSameOrAfter(toTime)) break
       }
@@ -180,10 +175,6 @@ export default {
       this.update({
         delivery: { ...this.fields },
       });
-    },
-    onHourSelect(obj){
-      this.fields.deliveryTime = obj.hour
-      this.onChange()
     }
   },
   mounted(){
