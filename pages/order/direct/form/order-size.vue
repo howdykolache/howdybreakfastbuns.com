@@ -137,7 +137,9 @@ export default {
     },
   },
   mounted() {
-    this.onChange();
+    this.fields.numberOfPeople = this.form.size.numberOfPeople
+    this.fields.bunsPerPerson = this.form.size.bunsPerPerson
+    this.fields.dozens = this.form.size.dozens
   },
   watch: {
     "fields.numberOfPeople": {

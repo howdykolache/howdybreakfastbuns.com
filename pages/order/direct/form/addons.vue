@@ -143,9 +143,17 @@ export default {
     next() {
       this.$router.push("/order/direct/form/review");
     },
+    initFromStore(){
+      for (const key in this.addons) {
+        const addon = this.addons[key];
+        const previousInstance = this.form.addons.find(a => a.id === addon.id)
+
+        if(previousInstance) this.addons[key].value = previousInstance.qty
+      }
+    }
   },
   mounted() {
-    this.onChange();
+    this.initFromStore()
   },
 };
 </script>

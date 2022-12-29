@@ -79,7 +79,7 @@ export default {
     },
   },
   mounted() {
-    this.onChange();
+    this.fields = { ...this.form.contact }
   },
 };
 </script>

@@ -14,9 +14,9 @@ export const state = () => ({
     },
     flavors: '',
     size: {
-      numberOfPeople: 1,
-      bunsPerPerson: 1,
-      dozens: 1,
+      numberOfPeople: null,
+      bunsPerPerson: null,
+      dozens: null,
       kolachesCostInCents: 5900
     },
     addons: []

@@ -121,7 +121,7 @@ export default {
     },
   },
   mounted() {
-    this.onChange();
+    this.flavors = this.form.flavors
   },
 };
 </script>

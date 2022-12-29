@@ -186,7 +186,8 @@ export default {
     },
   },
   mounted() {
-    this.onChange();
+    this.fields = { ...this.form.delivery }
+
     setTimeout(() => {
       this.$refs.datepicker.open();
     }, 1000);
