@@ -3,18 +3,18 @@
     class="relative w-9/12 mx-auto flex items-center justify-between lg:w-4/12"
   >
     <div
-      v-for="step in steps"
+      v-for="(step, index) in stepRoutes.length"
       :key="step"
-      @click="onSelect(step)"
+      @click="onNavigateToStep(index)" 
       :class="{
-        selected: step <= currentStep,
-        'cursor-pointer': isStepSelectable(step),
+        selected: index <= currentStepIndex,
+        'cursor-pointer': isStepSelectable(index),
       }"
       class="step"
     ></div>
     <div
       class="crossline progress"
-      :style="{ '--step-index': currentStep - 1 }"
+      :style="{ '--step-index': currentStepIndex - 1 }"
     ></div>
     <div class="crossline"></div>
   </div>
@@ -24,22 +24,35 @@
 export default {
   data() {
     return {
-      steps: 5
+      // Routes of he availabe steps
+      stepRoutes: [
+        'contact-info',
+        'order-date',
+        'order-size',
+        'flavors',
+        'addons'
+      ]
     }
   },
   computed: {
-    currentStep(){
-      return 1
+    // Compares current step route against the known route names and returns its index
+    currentStepIndex(){
+      const urlPaths = this.$route.path.split('/').filter(val => val.trim().length)
+      const lastPath = urlPaths[urlPaths.length - 1]
+      
+      return this.stepRoutes.indexOf(lastPath)
     }
   },
   methods: {
-    isStepSelectable(step) {
-      return step < this.currentStep; // We can only go back to preceding steps
+    isStepSelectable(stepIndex) {
+      return stepIndex < this.currentStepIndex; // We can only go back to preceding steps
     },
-    onSelect(step) {
-      if (!this.isStepSelectable(step)) return;
+    onNavigateToStep(stepIndex) {
+      if (!this.isStepSelectable(stepIndex)) return;
 
-      this.$emit("select", step);
+      const stepRoute = this.stepRoutes[stepIndex]
+
+      this.$router.push(`/order/direct/form/${stepRoute}`);
     },
   },
 };
