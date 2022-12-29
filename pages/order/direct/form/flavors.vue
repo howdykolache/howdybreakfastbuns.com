@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-6 lg:mt-12">
     <h4 class="text-center text-lg font-bold lg:text-2xl">FLAVORS</h4>
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-7/12">
@@ -54,14 +54,17 @@
             </textarea>
           </div>
           <button
-            :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+            :class="{ 'opacity-60 cursor-not-allowed': !canProceed }"
             :disabled="!canProceed"
             class="btn btn-primary w-full p-3 mt-10"
-            @click="$emit('next')"
+            @click="next"
           >
             Next: ADD-ONS
           </button>
-          <button class="btn btn-secondary w-full p-3 mt-2 underline" @click="$emit('previous')">
+          <button
+            class="btn btn-secondary w-full p-3 mt-2 underline"
+            @click="$emit('previous')"
+          >
             Previous step
           </button>
         </div>
@@ -100,9 +103,9 @@ export default {
 
       return true;
     },
-    canProceed(){
-      return this.flavors.length
-    }
+    canProceed() {
+      return this.flavors.length;
+    },
   },
   methods: {
     ...mapActions({
@@ -110,12 +113,15 @@ export default {
     }),
     onChange() {
       this.update({
-        flavors: this.flavors
+        flavors: this.flavors,
       });
     },
+    next() {
+      this.$router.push("/order/direct/form/addons");
+    },
   },
-  mounted(){
-    this.onChange()
-  }
+  mounted() {
+    this.onChange();
+  },
 };
 </script>

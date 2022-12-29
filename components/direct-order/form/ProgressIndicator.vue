@@ -22,15 +22,15 @@
 
 <script>
 export default {
-  props: {
-    steps: {
-      required: true,
-      type: Number,
-    },
-    currentStep: {
-      required: true,
-      type: Number,
-    },
+  data() {
+    return {
+      steps: 5
+    }
+  },
+  computed: {
+    currentStep(){
+      return 1
+    }
   },
   methods: {
     isStepSelectable(step) {

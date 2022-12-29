@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div class="mt-6 lg:mt-12">
     <h4 class="text-center text-lg font-bold lg:text-2xl">CONTACT INFO</h4>
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-7/12">
@@ -10,7 +10,8 @@
         <Input
           v-model="fields.email"
           @change="onChange"
-          sublabel="For sending receipts or confirmations" type="email"
+          sublabel="For sending receipts or confirmations"
+          type="email"
         >
           What is your <span class="text-highlight">email address</span>?
         </Input>
@@ -19,13 +20,14 @@
           @change="onChange"
           sublabel="For text message notifications on the order date"
         >
-          What is the best <span class="text-highlight">cell phone number</span> to text?
+          What is the best
+          <span class="text-highlight">cell phone number</span> to text?
         </Input>
         <button
-          :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+          :class="{ 'opacity-60 cursor-not-allowed': !canProceed }"
           :disabled="!canProceed"
           class="btn btn-primary w-full p-3 mt-10"
-          @click="$emit('next')"
+          @click="next"
         >
           Next: DATE & TIME
         </button>
@@ -34,47 +36,50 @@
         <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import Input from "@/components/inputs/Input.vue";
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     Input,
   },
-  data(){
+  data() {
     return {
       fields: {
-        name: '',
-        email: '',
-        phoneNumber: '',
-      }
-    }
+        name: "",
+        email: "",
+        phoneNumber: "",
+      },
+    };
   },
   computed: {
     ...mapGetters({
-      form: 'order-form/fields'
+      form: "order-form/fields",
     }),
-    canProceed(){
-      const { name, email, phoneNumber } = this.fields
-      return name.length && email.length && phoneNumber.length
-    }
+    canProceed() {
+      const { name, email, phoneNumber } = this.fields;
+      return name.length && email.length && phoneNumber.length;
+    },
   },
   methods: {
     ...mapActions({
-      update: 'order-form/update'
+      update: "order-form/update",
     }),
-    onChange(){
+    onChange() {
       this.update({
-        contact: { ...this.fields }
-      })
-    }
+        contact: { ...this.fields },
+      });
+    },
+    next() {
+      this.$router.push("/order/direct/form/order-date");
+    },
   },
-  mounted(){
-    this.onChange()
-  }
+  mounted() {
+    this.onChange();
+  },
 };
 </script>

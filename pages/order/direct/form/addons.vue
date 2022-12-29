@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-6 lg:mt-12">
     <h4 class="text-center text-lg font-bold lg:text-2xl">ADD-ONS</h4>
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-8/12">
@@ -9,8 +9,12 @@
           :class="{ '!mt-6': !addon.description }"
           class="flex items-start mt-2"
         >
-          <div  class="w-2/12 flex justify-between items-center">
-            <img src="~/assets/icons/minus.svg" @click="decrementAddonQty(key)" class="w-6 cursor-pointer" />
+          <div class="w-2/12 flex justify-between items-center">
+            <img
+              src="~/assets/icons/minus.svg"
+              @click="decrementAddonQty(key)"
+              class="w-6 cursor-pointer"
+            />
             <input
               type="text"
               @change="onChange"
@@ -18,17 +22,24 @@
               v-model="addons[key].value"
               class="w-9 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
             />
-            <img src="~/assets/icons/plus.svg" @click="incrementAddonQty(key)" class="w-6 cursor-pointer" />
+            <img
+              src="~/assets/icons/plus.svg"
+              @click="incrementAddonQty(key)"
+              class="w-6 cursor-pointer"
+            />
           </div>
           <div class="w-10/12 ml-4 flex flex-col">
             <span class="mt-0.5">{{ addon.name }}</span>
             <span class="text-gray-400 text-sm">{{ addon.description }}</span>
           </div>
         </div>
-        <button @click="$emit('next')" class="btn btn-primary w-full p-3 mt-10">
+        <button @click="next" class="btn btn-primary w-full p-3 mt-10">
           REVIEW
         </button>
-        <button class="btn btn-secondary w-full p-3 mt-2 underline" @click="$emit('previous')">
+        <button
+          class="btn btn-secondary w-full p-3 mt-2 underline"
+          @click="$emit('previous')"
+        >
           Previous step
         </button>
       </div>
@@ -52,7 +63,7 @@ export default {
             "Fruit chia pudding that we make in house. Gluten free and vegan. No refined sugars. Contains almond milk.",
           value: 0,
           priceInCents: 0,
-          id: 1
+          id: 1,
         },
         "coffee carafe": {
           name: "Coffee carafe ($35)",
@@ -60,7 +71,7 @@ export default {
             "Coffee carafe, cups, lids, creamer, sweetener for 10 people. Serving Groundswell coffee, one of our favorite local brewers in Chicago.",
           value: 0,
           priceInCents: 3500,
-          id: 2
+          id: 2,
         },
         "tea carafe": {
           name: "Tea carafe ($35)",
@@ -68,19 +79,19 @@ export default {
             "Hot water carafe, assorted tea bags, cups for 10 people.",
           value: 0,
           priceInCents: 3500,
-          id: 3
+          id: 3,
         },
         "orange juice": {
           name: "Orange juice ($4)",
           value: 0,
           priceInCents: 400,
-          id: 4
+          id: 4,
         },
         "topo chico": {
           name: "Topo chico ($4)",
           value: 0,
           priceInCents: 400,
-          id: 5
+          id: 5,
         },
       },
     };
@@ -116,22 +127,25 @@ export default {
         addons: this.selectedAddons,
       });
     },
-    incrementAddonQty(key){
-      this.addons[key].value++
-      this.onChange()
+    incrementAddonQty(key) {
+      this.addons[key].value++;
+      this.onChange();
     },
-    decrementAddonQty(key){
-      if (!this.addons[key].value) return
+    decrementAddonQty(key) {
+      if (!this.addons[key].value) return;
 
-      this.addons[key].value--
-      this.onChange()
+      this.addons[key].value--;
+      this.onChange();
     },
     onQtyInputKeypress(e) {
-      if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault()
+      if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault();
+    },
+    next() {
+      this.$router.push("/order/direct/form/review");
     },
   },
-  mounted(){
-    this.onChange()
-  }
+  mounted() {
+    this.onChange();
+  },
 };
 </script>

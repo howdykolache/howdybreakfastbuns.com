@@ -9,14 +9,14 @@
             guests with light, airy dough wrapped around delicious fillings!
           </p>
           <p>We’ll guide you through the process to make the perfect order.</p>
-          <nuxt-link to="/order/direct/form" class="btn btn-primary mt-10 hidden uppercase lg:inline-block">Begin order</nuxt-link>
+          <nuxt-link to="/order/direct/form/contact-info/" class="btn btn-primary mt-10 hidden uppercase lg:inline-block">Begin order</nuxt-link>
 
         </div>
         <div>
             <img src="~/assets/img/kolaches.png" />
         </div>
       </div>
-      <nuxt-link to="/order/direct/form" class="btn btn-primary mt-8 w-full block uppercase lg:hidden">Begin order</nuxt-link>
+      <nuxt-link to="/order/direct/form/contact-info/" class="btn btn-primary mt-8 w-full block uppercase lg:hidden">Begin order</nuxt-link>
     </section>
   </main>
 </template>
