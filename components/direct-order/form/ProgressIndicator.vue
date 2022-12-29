@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="currentStepIndex >= 0"
     class="relative w-9/12 mx-auto flex items-center justify-between lg:w-4/12"
   >
     <div
