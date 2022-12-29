@@ -22,20 +22,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  data() {
-    return {
-      // Routes of he availabe steps
-      stepRoutes: [
-        'contact-info',
-        'order-date',
-        'order-size',
-        'flavors',
-        'addons'
-      ]
-    }
-  },
   computed: {
+    ...mapGetters({
+      stepRoutes: "order-form/stepRoutes"
+    }),
     // Compares current step route against the known route names and returns its index
     currentStepIndex(){
       const urlPaths = this.$route.path.split('/').filter(val => val.trim().length)

@@ -21,6 +21,14 @@ export const state = () => ({
     },
     addons: []
   },
+  // Routes of he availabe steps
+  stepRoutes: [
+    'contact-info',
+    'order-date',
+    'order-size',
+    'flavors',
+    'addons'
+  ]
 });
 
 export const mutations = {
@@ -42,4 +50,7 @@ export const getters = {
   fields(state) {
     return state.fields;
   },
+  stepRoutes(state){
+    return state.stepRoutes
+  }
 };
