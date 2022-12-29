@@ -61,12 +61,7 @@
           >
             Next: ADD-ONS
           </button>
-          <button
-            class="btn btn-secondary w-full p-3 mt-2 underline"
-            @click="$emit('previous')"
-          >
-            Previous step
-          </button>
+          <PreviousStepButton @previous="$emit('previous')"/>
         </div>
       </div>
       <div class="hidden lg:block">
@@ -77,12 +72,14 @@
 </template>
 
 <script>
+import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
 import RadioButton from "@/components/inputs/RadioButton.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     RadioButton,
+    PreviousStepButton,
   },
   data() {
     return {

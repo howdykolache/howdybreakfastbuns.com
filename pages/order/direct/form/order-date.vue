@@ -77,12 +77,7 @@
           >
             Next: ORDER SIZE
           </button>
-          <button
-            class="btn btn-secondary w-full p-3 mt-2 underline"
-            @click="$emit('previous')"
-          >
-            Previous step
-          </button>
+          <PreviousStepButton @previous="$emit('previous')"/>
         </div>
       </div>
       <div class="hidden lg:block">
@@ -93,6 +88,7 @@
 </template>
 
 <script>
+import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
 import Input from "@/components/inputs/Input.vue";
 import RadioButton from "@/components/inputs/RadioButton";
 import { mapGetters, mapActions } from "vuex";
@@ -103,6 +99,7 @@ import Multiselect from "vue-multiselect";
 
 export default {
   components: {
+    PreviousStepButton,
     Input,
     RadioButton,
     DatePicker,

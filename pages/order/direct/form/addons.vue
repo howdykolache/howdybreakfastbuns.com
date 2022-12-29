@@ -36,12 +36,7 @@
         <button @click="next" class="btn btn-primary w-full p-3 mt-10">
           REVIEW
         </button>
-        <button
-          class="btn btn-secondary w-full p-3 mt-2 underline"
-          @click="$emit('previous')"
-        >
-          Previous step
-        </button>
+      <PreviousStepButton @previous="$emit('previous')"/>
       </div>
       <div class="hidden lg:block">
         <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
@@ -51,9 +46,13 @@
 </template>
 
 <script>
+import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  components: {
+    PreviousStepButton,
+  },
   data() {
     return {
       addons: {
