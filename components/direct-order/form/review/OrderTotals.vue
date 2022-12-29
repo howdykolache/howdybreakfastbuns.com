@@ -5,7 +5,10 @@
     <div class="mt-3">
       <div class="flex items-center">
         <strong class="w-10 text-sm">{{ form.size.dozens }}</strong>
-        <span>Howdy Breakfast Buns (dozen)</span>
+        <div class="flex items-center">
+          <span>Howdy Breakfast Buns (dozen)</span>
+          <EditButton route="/order/direct/form/order-size" />
+        </div>
         <span class="flex-1 text-right"
           >${{ form.size.kolachesCostInCents / 100 }}</span
         >
@@ -62,8 +65,12 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import EditButton from '../EditButton.vue'
 
 export default {
+  components: {
+    EditButton
+  },
   data() {
     return {
         tip: 0,
