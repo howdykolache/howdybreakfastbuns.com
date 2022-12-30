@@ -14,13 +14,21 @@ export const state = () => ({
     },
     flavors: '',
     size: {
-      numberOfPeople: 1,
-      bunsPerPerson: 1,
-      dozens: 1,
+      numberOfPeople: null,
+      bunsPerPerson: null,
+      dozens: null,
       kolachesCostInCents: 5900
     },
     addons: []
   },
+  // Routes of he availabe steps
+  stepRoutes: [
+    'contact-info',
+    'order-date',
+    'order-size',
+    'flavors',
+    'addons'
+  ]
 });
 
 export const mutations = {
@@ -42,4 +50,7 @@ export const getters = {
   fields(state) {
     return state.fields;
   },
+  stepRoutes(state){
+    return state.stepRoutes
+  }
 };

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-6 lg:mt-12">
     <h4 class="text-center text-lg font-bold lg:text-2xl">ADD-ONS</h4>
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-8/12">
@@ -9,8 +9,12 @@
           :class="{ '!mt-6': !addon.description }"
           class="flex items-start mt-2"
         >
-          <div  class="w-2/12 flex justify-between items-center">
-            <img src="~/assets/icons/minus.svg" @click="decrementAddonQty(key)" class="w-6 cursor-pointer" />
+          <div class="w-2/12 flex justify-between items-center">
+            <img
+              src="~/assets/icons/minus.svg"
+              @click="decrementAddonQty(key)"
+              class="w-6 cursor-pointer"
+            />
             <input
               type="text"
               @change="onChange"
@@ -18,19 +22,21 @@
               v-model="addons[key].value"
               class="w-9 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
             />
-            <img src="~/assets/icons/plus.svg" @click="incrementAddonQty(key)" class="w-6 cursor-pointer" />
+            <img
+              src="~/assets/icons/plus.svg"
+              @click="incrementAddonQty(key)"
+              class="w-6 cursor-pointer"
+            />
           </div>
           <div class="w-10/12 ml-4 flex flex-col">
             <span class="mt-0.5">{{ addon.name }}</span>
             <span class="text-gray-400 text-sm">{{ addon.description }}</span>
           </div>
         </div>
-        <button @click="$emit('next')" class="btn btn-primary w-full p-3 mt-10">
-          REVIEW
+        <button @click="next" class="btn btn-primary w-full p-3 mt-10">
+          {{ inEditMode ? 'Save' : 'REVIEW'}}
         </button>
-        <button class="btn btn-secondary w-full p-3 mt-2 underline" @click="$emit('previous')">
-          Previous step
-        </button>
+      <PreviousStepButton @previous="$emit('previous')"/>
       </div>
       <div class="hidden lg:block">
         <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
@@ -40,9 +46,14 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
+  components: {
+    PreviousStepButton,
+  },
+  mixins: [formStepMixin],
   data() {
     return {
       addons: {
@@ -83,12 +94,10 @@ export default {
           id: 5
         },
       },
+      nextStepRoute: "/order/direct/form/review"
     };
   },
   computed: {
-    ...mapGetters({
-      form: "order-form/fields",
-    }),
     selectedAddons() {
       const res = [];
 
@@ -106,32 +115,37 @@ export default {
 
       return res;
     },
+    dataToCommit(){
+      return {
+        addons: this.selectedAddons,
+      }
+    }
   },
   methods: {
-    ...mapActions({
-      update: "order-form/update",
-    }),
-    onChange() {
-      this.update({
-        addons: this.selectedAddons,
-      });
+    incrementAddonQty(key) {
+      this.addons[key].value++;
+      this.onChange();
     },
-    incrementAddonQty(key){
-      this.addons[key].value++
-      this.onChange()
-    },
-    decrementAddonQty(key){
-      if (!this.addons[key].value) return
+    decrementAddonQty(key) {
+      if (!this.addons[key].value) return;
 
-      this.addons[key].value--
-      this.onChange()
+      this.addons[key].value--;
+      this.onChange();
     },
     onQtyInputKeypress(e) {
-      if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault()
+      if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault();
     },
+    initFromStore(){
+      for (const key in this.addons) {
+        const addon = this.addons[key];
+        const previousInstance = this.form.addons.find(a => a.id === addon.id)
+
+        if(previousInstance) this.addons[key].value = previousInstance.qty
+      }
+    }
   },
-  mounted(){
-    this.onChange()
-  }
+  mounted() {
+    this.initFromStore()
+  },
 };
 </script>

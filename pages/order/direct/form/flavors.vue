@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-6 lg:mt-12">
     <h4 class="text-center text-lg font-bold lg:text-2xl">FLAVORS</h4>
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-7/12">
@@ -54,16 +54,14 @@
             </textarea>
           </div>
           <button
-            :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+            :class="{ 'opacity-60 cursor-not-allowed': !canProceed }"
             :disabled="!canProceed"
             class="btn btn-primary w-full p-3 mt-10"
-            @click="$emit('next')"
+            @click="next"
           >
-            Next: ADD-ONS
+            {{ inEditMode ? 'Save' : 'Next: ADD-ONS' }}
           </button>
-          <button class="btn btn-secondary w-full p-3 mt-2 underline" @click="$emit('previous')">
-            Previous step
-          </button>
+          <PreviousStepButton @previous="$emit('previous')"/>
         </div>
       </div>
       <div class="hidden lg:block">
@@ -74,22 +72,23 @@
 </template>
 
 <script>
+import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
 import RadioButton from "@/components/inputs/RadioButton.vue";
-import { mapGetters, mapActions } from "vuex";
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
     RadioButton,
+    PreviousStepButton,
   },
+  mixins: [formStepMixin],
   data() {
     return {
       flavors: "Howdy Mix",
+      nextStepRoute: "/order/direct/form/addons"
     };
   },
   computed: {
-    ...mapGetters({
-      form: "order-form/fields",
-    }),
     showCustomFlavorsInput() {
       if (
         this.flavors.startsWith("Howdy Mix") ||
@@ -100,22 +99,17 @@ export default {
 
       return true;
     },
-    canProceed(){
-      return this.flavors.length
+    canProceed() {
+      return this.flavors.length;
+    },
+    dataToCommit(){
+      return {
+        flavors: this.flavors,
+      }
     }
   },
-  methods: {
-    ...mapActions({
-      update: "order-form/update",
-    }),
-    onChange() {
-      this.update({
-        flavors: this.flavors
-      });
-    },
+  mounted() {
+    this.flavors = this.form.flavors
   },
-  mounted(){
-    this.onChange()
-  }
 };
 </script>

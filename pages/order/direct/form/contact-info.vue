@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div class="mt-6 lg:mt-12">
     <h4 class="text-center text-lg font-bold lg:text-2xl">CONTACT INFO</h4>
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-7/12">
@@ -10,7 +10,8 @@
         <Input
           v-model="fields.email"
           @change="onChange"
-          sublabel="For sending receipts or confirmations" type="email"
+          sublabel="For sending receipts or confirmations"
+          type="email"
         >
           What is your <span class="text-highlight">email address</span>?
         </Input>
@@ -19,62 +20,57 @@
           @change="onChange"
           sublabel="For text message notifications on the order date"
         >
-          What is the best <span class="text-highlight">cell phone number</span> to text?
+          What is the best
+          <span class="text-highlight">cell phone number</span> to text?
         </Input>
         <button
-          :class="{'opacity-60 cursor-not-allowed': !canProceed}"
+          :class="{ 'opacity-60 cursor-not-allowed': !canProceed }"
           :disabled="!canProceed"
           class="btn btn-primary w-full p-3 mt-10"
-          @click="$emit('next')"
+          @click="next"
         >
-          Next: DATE & TIME
+          {{ inEditMode ? 'Save' : 'Next: DATE & TIME' }}
         </button>
       </div>
       <div class="hidden lg:block">
         <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import Input from "@/components/inputs/Input.vue";
-import { mapGetters, mapActions } from 'vuex'
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
     Input,
   },
-  data(){
+  mixins: [formStepMixin],
+  data() {
     return {
       fields: {
-        name: '',
-        email: '',
-        phoneNumber: '',
+        name: "",
+        email: "",
+        phoneNumber: "",
+      },
+      nextStepRoute: "/order/direct/form/order-date"
+    };
+  },
+  computed: {
+    canProceed() {
+      const { name, email, phoneNumber } = this.fields;
+      return name.length && email.length && phoneNumber.length;
+    },
+    dataToCommit(){
+      return {
+        contact: { ...this.fields },
       }
     }
   },
-  computed: {
-    ...mapGetters({
-      form: 'order-form/fields'
-    }),
-    canProceed(){
-      const { name, email, phoneNumber } = this.fields
-      return name.length && email.length && phoneNumber.length
-    }
+  mounted() {
+    this.fields = { ...this.form.contact }
   },
-  methods: {
-    ...mapActions({
-      update: 'order-form/update'
-    }),
-    onChange(){
-      this.update({
-        contact: { ...this.fields }
-      })
-    }
-  },
-  mounted(){
-    this.onChange()
-  }
 };
 </script>
