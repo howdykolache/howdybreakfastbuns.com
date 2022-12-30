@@ -1,15 +1,18 @@
 <template>
-    <div class="container mx-auto">
-        <DirectOrderForm />
+  <div class="container mx-auto">
+    <div class="mt-10">
+      <ProgressIndicator />
+      <NuxtChild />
     </div>
+  </div>
 </template>
 
 <script>
-import DirectOrderForm from '@/components/direct-order/form/DirectOrderForm.vue'
+import ProgressIndicator from "@/components/direct-order/form/ProgressIndicator.vue";
 
 export default {
   components: {
-    DirectOrderForm
+    ProgressIndicator
   }
-}
+};
 </script>
