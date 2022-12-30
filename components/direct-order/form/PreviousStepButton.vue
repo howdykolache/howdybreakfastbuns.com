@@ -22,11 +22,16 @@ export default {
   },
   methods: {
     onClick(){
-      if (!this.currentStepIndex) return
+      let prevStepRoute = this.stepRoutes[this.currentStepIndex - 1]
 
-      const stepRoute = this.stepRoutes[this.currentStepIndex - 1]
+      // Safe to assume we are in the review page if this is undefined, and that 
+      // we finished going through the steps
+      if (!prevStepRoute) {
+        // If that’s the case, we will fallback to the last step as the next previous step
+        prevStepRoute = this.stepRoutes[this.stepRoutes.length - 1]
+      }
 
-      this.$router.push(`/order/direct/form/${stepRoute}`);
+      this.$router.push(`/order/direct/form/${prevStepRoute}`);
     }
   }
 }

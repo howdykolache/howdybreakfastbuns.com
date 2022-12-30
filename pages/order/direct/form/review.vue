@@ -17,12 +17,7 @@
           >
             PAY
           </button>
-          <button
-            class="btn btn-secondary w-full p-3 mt-2 underline"
-            @click="$emit('previous')"
-          >
-            Previous step
-          </button>
+          <PreviousStepButton />
         </div>
         <div class="hidden lg:block">
           <img src="~/assets/img/howdy2.png" alt="Howdy Breakfast Buns" />
@@ -39,11 +34,13 @@
 import { mapGetters, mapActions } from "vuex";
 import OrderInfoOverview from "@/components/direct-order/form/review/OrderInfoOverview.vue";
 import OrderTotals from "@/components/direct-order/form/review/OrderTotals.vue";
+import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
 
 export default {
   components: {
     OrderInfoOverview,
     OrderTotals,
+    PreviousStepButton
   },
   data() {
     return {
