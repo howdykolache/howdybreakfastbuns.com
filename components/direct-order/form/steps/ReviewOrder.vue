@@ -230,7 +230,7 @@ export default {
 }
 
 button.tip-button {
-  border: 1px solid rgb(252, 227, 0);
+  @apply border-primary border;
   font-size: 0.8em;
   border-radius: 5px;
   padding: 0em 1em;
