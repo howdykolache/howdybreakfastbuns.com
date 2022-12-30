@@ -47,12 +47,13 @@
 
 <script>
 import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
-import { mapGetters, mapActions } from "vuex";
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
     PreviousStepButton,
   },
+  mixins: [formStepMixin],
   data() {
     return {
       addons: {
@@ -93,12 +94,10 @@ export default {
           id: 5,
         },
       },
+      nextStepRoute: "/order/direct/form/review"
     };
   },
   computed: {
-    ...mapGetters({
-      form: "order-form/fields",
-    }),
     selectedAddons() {
       const res = [];
 
@@ -116,16 +115,13 @@ export default {
 
       return res;
     },
+    dataToCommit(){
+      return {
+        addons: this.selectedAddons,
+      }
+    }
   },
   methods: {
-    ...mapActions({
-      update: "order-form/update",
-    }),
-    onChange() {
-      this.update({
-        addons: this.selectedAddons,
-      });
-    },
     incrementAddonQty(key) {
       this.addons[key].value++;
       this.onChange();
@@ -138,9 +134,6 @@ export default {
     },
     onQtyInputKeypress(e) {
       if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault();
-    },
-    next() {
-      this.$router.push("/order/direct/form/review");
     },
     initFromStore(){
       for (const key in this.addons) {

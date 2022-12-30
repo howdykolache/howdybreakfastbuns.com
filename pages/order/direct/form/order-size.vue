@@ -80,7 +80,7 @@
 import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
 import RadioButton from "@/components/inputs/RadioButton.vue";
 import Input from "@/components/inputs/Input.vue";
-import { mapGetters, mapActions } from "vuex";
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
@@ -88,6 +88,7 @@ export default {
     RadioButton,
     Input,
   },
+  mixins: [formStepMixin],
   data() {
     return {
       pricePerDozenInCents: 5900,
@@ -96,12 +97,10 @@ export default {
         bunsPerPerson: null,
         dozens: null,
       },
+      nextStepRoute: "/order/direct/form/flavors"
     };
   },
   computed: {
-    ...mapGetters({
-      form: "order-form/fields",
-    }),
     recommendedDozens() {
       return Math.ceil(
         (this.fields.numberOfPeople * this.fields.bunsPerPerson) / 12
@@ -116,22 +115,14 @@ export default {
     canProceed() {
       return this.fields.dozens;
     },
-  },
-  methods: {
-    ...mapActions({
-      update: "order-form/update",
-    }),
-    onChange() {
-      this.update({
+    dataToCommit(){
+      return {
         size: {
           ...this.fields,
           kolachesCostInCents: this.subtotal,
         },
-      });
-    },
-    next() {
-      this.$router.push("/order/direct/form/flavors");
-    },
+      }
+    }
   },
   mounted() {
     this.fields.numberOfPeople = this.form.size.numberOfPeople

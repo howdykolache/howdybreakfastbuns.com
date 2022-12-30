@@ -41,12 +41,13 @@
 
 <script>
 import Input from "@/components/inputs/Input.vue";
-import { mapGetters, mapActions } from "vuex";
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
     Input,
   },
+  mixins: [formStepMixin],
   data() {
     return {
       fields: {
@@ -54,29 +55,19 @@ export default {
         email: "",
         phoneNumber: "",
       },
+      nextStepRoute: "/order/direct/form/order-date"
     };
   },
   computed: {
-    ...mapGetters({
-      form: "order-form/fields",
-    }),
     canProceed() {
       const { name, email, phoneNumber } = this.fields;
       return name.length && email.length && phoneNumber.length;
     },
-  },
-  methods: {
-    ...mapActions({
-      update: "order-form/update",
-    }),
-    onChange() {
-      this.update({
+    dataToCommit(){
+      return {
         contact: { ...this.fields },
-      });
-    },
-    next() {
-      this.$router.push("/order/direct/form/order-date");
-    },
+      }
+    }
   },
   mounted() {
     this.fields = { ...this.form.contact }

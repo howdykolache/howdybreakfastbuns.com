@@ -91,11 +91,11 @@
 import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
 import Input from "@/components/inputs/Input.vue";
 import RadioButton from "@/components/inputs/RadioButton";
-import { mapGetters, mapActions } from "vuex";
 import DatePicker from "@sum.cumo/vue-datepicker";
 import "@sum.cumo/vue-datepicker/dist/Datepicker.css";
 import moment from "moment";
 import Multiselect from "vue-multiselect";
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
@@ -105,6 +105,7 @@ export default {
     DatePicker,
     Multiselect,
   },
+  mixins: [formStepMixin],
   data() {
     return {
       fields: {
@@ -128,12 +129,10 @@ export default {
         ],
         to: moment().toDate(), // Disable past dates
       },
+      nextStepRoute: "/order/direct/form/order-size"
     };
   },
   computed: {
-    ...mapGetters({
-      form: "order-form/fields",
-    }),
     availableHours() {
       const format = "h:mm a";
       const fromTime = moment("7:30 am", format);
@@ -162,25 +161,17 @@ export default {
 
       return true;
     },
-  },
-  methods: {
-    ...mapActions({
-      update: "order-form/update",
-    }),
-    onChange() {
+    dataToCommit(){
       // format the selected date
       if (this.fields.date) {
         const date = moment(this.fields.date).format("MM/DD/YYYY");
         this.fields.date = date;
       }
 
-      this.update({
+      return {
         delivery: { ...this.fields },
-      });
-    },
-    next() {
-      this.$router.push("/order/direct/form/order-size");
-    },
+      }
+    }
   },
   mounted() {
     this.fields = { ...this.form.delivery }

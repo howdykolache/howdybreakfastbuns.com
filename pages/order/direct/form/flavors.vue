@@ -74,22 +74,21 @@
 <script>
 import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
 import RadioButton from "@/components/inputs/RadioButton.vue";
-import { mapGetters, mapActions } from "vuex";
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
     RadioButton,
     PreviousStepButton,
   },
+  mixins: [formStepMixin],
   data() {
     return {
       flavors: "Howdy Mix",
+      nextStepRoute: "/order/direct/form/addons"
     };
   },
   computed: {
-    ...mapGetters({
-      form: "order-form/fields",
-    }),
     showCustomFlavorsInput() {
       if (
         this.flavors.startsWith("Howdy Mix") ||
@@ -103,19 +102,11 @@ export default {
     canProceed() {
       return this.flavors.length;
     },
-  },
-  methods: {
-    ...mapActions({
-      update: "order-form/update",
-    }),
-    onChange() {
-      this.update({
+    dataToCommit(){
+      return {
         flavors: this.flavors,
-      });
-    },
-    next() {
-      this.$router.push("/order/direct/form/addons");
-    },
+      }
+    }
   },
   mounted() {
     this.flavors = this.form.flavors
