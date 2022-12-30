@@ -5,6 +5,10 @@ export default {
     ...mapGetters({
       form: "order-form/fields",
     }),
+    inEditMode(){
+      return this.$route.query.editing && 
+      this.$route.query.editing == '1'
+    }
   },
   methods: {
     ...mapActions({
@@ -14,7 +18,11 @@ export default {
       this.update(this.dataToCommit);
     },
     next() {
-      this.$router.push(this.nextStepRoute);
+      let route = this.nextStepRoute
+      // Redirect back to review page when editing
+      if(this.inEditMode) route = "/order/direct/form/review"
+
+      this.$router.push(route);
     },
   }
 };
