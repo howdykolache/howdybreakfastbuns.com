@@ -58,40 +58,40 @@ export default {
     return {
       addons: {
         "chia pudding": {
-          name: "Chia pudding (Vegan/Gluten Free)",
+          name: "Chia pudding (Vegan/Gluten Free) ($4.99)",
           description:
             "Fruit chia pudding that we make in house. Gluten free and vegan. No refined sugars. Contains almond milk.",
           value: 0,
-          priceInCents: 0,
-          id: 1,
+          priceInCents: 499,
+          id: 1
         },
         "coffee carafe": {
-          name: "Coffee carafe ($35)",
+          name: "Coffee carafe ($34.99)",
           description:
             "Coffee carafe, cups, lids, creamer, sweetener for 10 people. Serving Groundswell coffee, one of our favorite local brewers in Chicago.",
           value: 0,
-          priceInCents: 3500,
-          id: 2,
+          priceInCents: 3499,
+          id: 2
         },
         "tea carafe": {
-          name: "Tea carafe ($35)",
+          name: "Tea carafe ($34.99)",
           description:
             "Hot water carafe, assorted tea bags, cups for 10 people.",
           value: 0,
-          priceInCents: 3500,
-          id: 3,
+          priceInCents: 3499,
+          id: 3
         },
         "orange juice": {
-          name: "Orange juice ($4)",
+          name: "Orange juice ($3.99)",
           value: 0,
-          priceInCents: 400,
-          id: 4,
+          priceInCents: 399,
+          id: 4
         },
         "topo chico": {
-          name: "Topo chico ($4)",
+          name: "Topo chico ($3.99)",
           value: 0,
-          priceInCents: 400,
-          id: 5,
+          priceInCents: 399,
+          id: 5
         },
       },
       nextStepRoute: "/order/direct/form/review"
