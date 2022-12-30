@@ -65,7 +65,7 @@
           class="btn btn-primary w-full p-3 mt-10"
           @click="next"
         >
-          Next: SELECT MIX
+          {{ inEditMode ? 'Save' : 'Next: SELECT MIX' }}
         </button>
         <PreviousStepButton @previous="$emit('previous')"/>
       </div>

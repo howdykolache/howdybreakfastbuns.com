@@ -34,7 +34,7 @@
           </div>
         </div>
         <button @click="next" class="btn btn-primary w-full p-3 mt-10">
-          REVIEW
+          {{ inEditMode ? 'Save' : 'REVIEW'}}
         </button>
       <PreviousStepButton @previous="$emit('previous')"/>
       </div>

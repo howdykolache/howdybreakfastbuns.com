@@ -59,7 +59,7 @@
             class="btn btn-primary w-full p-3 mt-10"
             @click="next"
           >
-            Next: ADD-ONS
+            {{ inEditMode ? 'Save' : 'Next: ADD-ONS' }}
           </button>
           <PreviousStepButton @previous="$emit('previous')"/>
         </div>

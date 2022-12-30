@@ -75,7 +75,7 @@
             class="btn btn-primary w-full p-3 mt-10"
             @click="next"
           >
-            Next: ORDER SIZE
+            {{ inEditMode ? 'Save' : 'Next: ORDER SIZE' }}
           </button>
           <PreviousStepButton @previous="$emit('previous')"/>
         </div>

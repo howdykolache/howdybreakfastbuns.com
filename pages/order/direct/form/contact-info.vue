@@ -29,7 +29,7 @@
           class="btn btn-primary w-full p-3 mt-10"
           @click="next"
         >
-          Next: DATE & TIME
+          {{ inEditMode ? 'Save' : 'Next: DATE & TIME' }}
         </button>
       </div>
       <div class="hidden lg:block">
