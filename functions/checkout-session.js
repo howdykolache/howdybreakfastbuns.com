@@ -2,27 +2,27 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY);
 const ADDONS = [
   {
     name: "Chia pudding (Vegan/Gluten Free)",
-    priceInCents: 0,
+    priceInCents: 499,
     id: 1,
   },
   {
     name: "Coffee carafe",
-    priceInCents: 3500,
+    priceInCents: 3499,
     id: 2,
   },
   {
     name: "Tea carafe",
-    priceInCents: 3500,
+    priceInCents: 3499,
     id: 3,
   },
   {
     name: "Orange juice",
-    priceInCents: 400,
+    priceInCents: 399,
     id: 4,
   },
   {
     name: "Topo chico",
-    priceInCents: 400,
+    priceInCents: 399,
     id: 5,
   },
 ];
