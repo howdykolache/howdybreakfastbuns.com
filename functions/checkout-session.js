@@ -115,7 +115,7 @@ const parseOrderData = (order) => {
         price_data: {
           currency: "usd",
           product_data: {
-            name: "Howdy Kolaches",
+            name: "Howdy Breakfast Buns",
           },
           unit_amount: orderCostInCents,
         },
