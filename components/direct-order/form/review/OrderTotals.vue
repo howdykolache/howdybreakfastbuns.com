@@ -69,27 +69,12 @@ export default {
   computed: {
     ...mapGetters({
       form: "order-form/fields",
+      addonsTotal: "order-form/addonsTotal",
+      subtotal: "order-form/subtotal",
+      deliveryCost: "order-form/deliveryCost",
+      tax: "order-form/tax",
+      total: "order-form/total",
     }),
-    addonsTotal() {
-      return this.form.addons.reduce((t, item) => t + item.qty * item.priceInCents, 0);
-    },
-    subtotal() {
-      return this.addonsTotal + this.form.size.kolachesCostInCents;
-    },
-    deliveryCost() {
-      if (this.form.delivery.orderType.toLowerCase() === "pickup") return 0;
-
-      return 0.1 * this.subtotal;
-    },
-    tax() {
-      return parseInt(0.1175 * this.subtotal, 10)
-    },
-    tipInCents(){
-      return Number(this.tip) * 100
-    },
-    total() {
-      return this.subtotal + this.tax + this.deliveryCost + this.tipInCents
-    },
   },
   methods: {
     ...mapActions({
@@ -97,7 +82,7 @@ export default {
     }),
     onTipChange(){
       this.update({
-        tipInCents: this.tipInCents
+        tipInCents: Number(this.tip) * 100
       });
     },
     formatCents(cents) {

@@ -19,7 +19,8 @@ export const state = () => ({
       dozens: null,
       kolachesCostInCents: 5900
     },
-    addons: []
+    addons: [],
+    tipInCents: 0
   },
   // Routes of he availabe steps
   stepRoutes: [
@@ -52,5 +53,22 @@ export const getters = {
   },
   stepRoutes(state){
     return state.stepRoutes
-  }
+  },
+  addonsTotal(state) {
+    return state.fields.addons.reduce((t, item) => t + item.qty * item.priceInCents, 0);
+  },
+  subtotal(state, getters) {
+    return getters.addonsTotal + state.fields.size.kolachesCostInCents;
+  },
+  deliveryCost(state, getters) {
+    if (state.fields.delivery.orderType.toLowerCase() === "pickup") return 0;
+
+    return 0.1 * getters.subtotal;
+  },
+  tax(state, getters) {
+    return parseInt(0.1175 * getters.subtotal, 10)
+  },
+  total(state, getters) {
+    return getters.subtotal + getters.tax + getters.deliveryCost + state.fields.tipInCents
+  },
 };
