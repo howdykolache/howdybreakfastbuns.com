@@ -106,8 +106,10 @@ export default {
       update: "order-form/update",
     }),
     onTipInputKeypress(e) {
-      // Only accept numbers
-      if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault()
+      // Only accept numbers and period for decimal (46)
+      if (!((e.charCode >= 48 && e.charCode <= 57) || e.charCode == 46)) {
+        e.preventDefault()
+      }
     },
     onTipChange(){
       this.update({
