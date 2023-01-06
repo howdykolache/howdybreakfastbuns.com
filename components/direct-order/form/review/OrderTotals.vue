@@ -89,6 +89,9 @@ export default {
       return (cents / 100).toLocaleString()
     }
   },
+  mounted(){
+    this.tip = this.form.tipInCents / 100
+  }
 };
 </script>
 

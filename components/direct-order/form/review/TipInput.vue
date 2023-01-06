@@ -79,6 +79,14 @@ export default {
       this.onChange();
     },
   },
+  watch: {
+    value: {
+        // Re-assign whenever the v-model value gets updated in the parent
+        handler: function(newVal){
+            this.tip = newVal
+        }
+    }
+  }
 };
 </script>
 
