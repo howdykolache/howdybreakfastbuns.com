@@ -42,19 +42,7 @@
         <span>Delivery (10%)</span>
         <span>${{ formatCents(deliveryCost) }}</span>
       </div>
-      <div class="flex justify-between mt-2">
-        <span>Tip</span>
-        <div class="flex items-center">
-          <span>$</span>
-          <input
-            type="text"
-            v-model="tip"
-            @keypress="onTipInputKeypress"
-            @change="onTipChange"
-            class="ml-3 w-16 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
-          />
-        </div>
-      </div>
+      <TipInput v-model="tip" @change="onTipChange" />
       <div class="flex justify-between mt-8">
         <strong>Total</strong>
         <strong>${{ formatCents(total) }}</strong>
@@ -66,10 +54,12 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import EditButton from '../EditButton.vue'
+import TipInput from './TipInput.vue'
 
 export default {
   components: {
-    EditButton
+    EditButton,
+    TipInput
   },
   data() {
     return {
@@ -105,12 +95,6 @@ export default {
     ...mapActions({
       update: "order-form/update",
     }),
-    onTipInputKeypress(e) {
-      // Only accept numbers and period for decimal (46)
-      if (!((e.charCode >= 48 && e.charCode <= 57) || e.charCode == 46)) {
-        e.preventDefault()
-      }
-    },
     onTipChange(){
       this.update({
         tipInCents: this.tipInCents
