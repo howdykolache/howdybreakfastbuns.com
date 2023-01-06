@@ -57,6 +57,12 @@ export default {
     }
   },
   mounted(){
+    // Redirect to the home if session id is not included in the url
+    if (!this.sessionId){
+      this.$router.push('/')
+      return
+    }
+
     this.getCheckoutSessionData()
   }
 }
