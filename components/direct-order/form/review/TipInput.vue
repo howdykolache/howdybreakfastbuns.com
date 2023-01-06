@@ -1,6 +1,24 @@
 <template>
   <div class="flex justify-between mt-2">
-    <span>Tip</span>
+    <div>
+      <span class="mr-4"> Tip </span>
+      <button
+        v-for="(tipAmount, index) in tipButtons"
+        :key="index"
+        class="tip-button"
+        :class="{ active: tipPercentEquals(tipAmount) }"
+        @click="onTipButtonClicked(tipAmount)"
+      >
+        {{ tipAmount }}%
+      </button>
+      <button
+        v-show="this.tip != 0"
+        @click="clearTip"
+        class="text-sm text-gray-400 pl-4"
+      >
+        clear
+      </button>
+    </div>
     <div class="flex items-center">
       <span>$</span>
       <input
@@ -15,6 +33,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     value: {
@@ -24,7 +44,14 @@ export default {
   data() {
     return {
       tip: this.value,
+      tipButtons: [10, 20, 30],
     };
+  },
+  computed: {
+    ...mapGetters({
+      subtotal: "order-form/subtotal",
+      form: "order-form/fields",
+    }),
   },
   methods: {
     onChange() {
@@ -37,6 +64,32 @@ export default {
         e.preventDefault();
       }
     },
+    onTipButtonClicked(pct) {
+      let newTipInCents = (pct / 100) * this.subtotal;
+      this.tip = Math.round(newTipInCents) / 100;
+      this.onChange();
+    },
+    tipPercentEquals(pct) {
+      // return true if the amount in the tip input equals approximately the argument percent amount
+      let computedTip = (pct / 100) * this.subtotal;
+      return Math.abs(computedTip - this.form.tipInCents) < 100;
+    },
+    clearTip() {
+      this.tip = 0;
+      this.onChange();
+    },
   },
 };
 </script>
+
+<style scoped>
+button.tip-button {
+  @apply border-primary border;
+  font-size: 0.8em;
+  border-radius: 5px;
+  padding: 0em 1em;
+}
+button.tip-button.active {
+  @apply bg-primary;
+}
+</style>
