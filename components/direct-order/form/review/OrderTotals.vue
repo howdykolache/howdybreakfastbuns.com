@@ -10,7 +10,7 @@
           <EditButton route="/order/direct/form/order-size" />
         </div>
         <span class="flex-1 text-right"
-          >${{ form.size.kolachesCostInCents / 100 }}</span
+          >${{ formatCents(form.size.kolachesCostInCents) }}</span
         >
       </div>
       <span class="ml-10 text-gray-500 text-sm">{{ form.flavors }}</span>
@@ -21,7 +21,7 @@
         <strong class="w-10 text-sm">{{ addon.qty }}</strong>
         <span>{{ addon.name }}</span>
         <span class="flex-1 text-right"
-          >${{ (addon.qty * addon.priceInCents) / 100 }}</span
+          >${{ formatCents(addon.qty * addon.priceInCents) }}</span
         >
       </div>
     </div>
@@ -29,18 +29,18 @@
     <div class="ml-10 mt-10">
       <div class="flex justify-between mt-2">
         <span>Subtotal</span>
-        <span>${{ subtotal / 100 }}</span>
+        <span>${{ formatCents(subtotal) }}</span>
       </div>
       <div class="flex justify-between mt-2">
         <span>Taxes</span>
-        <span>${{ tax / 100 }}</span>
+        <span>${{ formatCents(tax) }}</span>
       </div>
       <div
         v-if="form.delivery.orderType.toLowerCase() === 'delivery'"
         class="flex justify-between mt-2"
       >
         <span>Delivery (10%)</span>
-        <span>${{ deliveryCost / 100 }}</span>
+        <span>${{ formatCents(deliveryCost) }}</span>
       </div>
       <div class="flex justify-between mt-2">
         <span>Tip</span>
@@ -57,7 +57,7 @@
       </div>
       <div class="flex justify-between mt-8">
         <strong>Total</strong>
-        <strong>${{ total / 100 }}</strong>
+        <strong>${{ formatCents(total) }}</strong>
       </div>
     </div>
   </div>
@@ -113,6 +113,9 @@ export default {
       this.update({
         tipInCents: this.tipInCents
       });
+    },
+    formatCents(cents) {
+      return (cents / 100).toLocaleString()
     }
   },
 };
