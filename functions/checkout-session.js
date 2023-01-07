@@ -37,12 +37,19 @@ exports.handler = async (event, context) => {
 
   const data = JSON.parse(event.body);
 
-  const session = await createSession(data);
+  const { session, error } = await createSession(data);
 
-  return {
-    statusCode: session ? 200 : 500,
-    body: session ? JSON.stringify(session) : "",
-  };
+  if (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error }),
+    };
+  } else {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ session }),
+    };
+  }
 };
 
 const createSession = async (order) => {
@@ -50,19 +57,38 @@ const createSession = async (order) => {
 
   const { line_items, metadata } = parseOrderData(order);
 
+  // This function's return/output
+  const response = {
+    session: null,
+    error: null
+  }
+
   try {
-    const session = await stripe.checkout.sessions.create({
+    response.session = await stripe.checkout.sessions.create({
       success_url: `${BASE_URL}/catering-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${BASE_URL}/catering-payment-error`,
       line_items,
       metadata,
       mode: "payment",
     });
-
-    return session;
   } catch (error) {
-    console.error(error);
+    console.error(error)
+    if (error.type && error.raw.message) {
+      // Stripe related error
+      response.error = {
+        type: error.type,
+        message: error.raw.message
+      }
+    } else {
+      // For security reasons, we won’t return the entire error stack to the client.
+      // Instead, return a generic error messag but still log the error to the command line.
+      response.error = {
+        message: 'Internal server error!',
+      }
+    }
   }
+
+  return response
 };
 
 const parseOrderData = (order) => {

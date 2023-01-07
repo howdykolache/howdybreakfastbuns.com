@@ -84,13 +84,20 @@ export default {
           },
           body: JSON.stringify(this.payload),
         });
+
         const data = await res.json();
-        window.location.replace(data.url);
+
+        if (res.status === 200) {
+          window.location.replace(data.session.url);
+        } else {
+          console.error(data.error)
+        }
       } catch (error) {
         console.error(error);
         this.error = true;
-        this.submitting = false;
       }
+
+      this.submitting = false;
     },
   },
 };
