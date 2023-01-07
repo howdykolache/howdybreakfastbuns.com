@@ -65,7 +65,7 @@ const createSession = async (order) => {
 
   try {
     response.session = await stripe.checkout.sessions.create({
-      success_url: `${BASE_URL}/catering-success`,
+      success_url: `${BASE_URL}/catering-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${BASE_URL}/catering-payment-error`,
       line_items,
       metadata,
