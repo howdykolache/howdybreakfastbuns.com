@@ -35,7 +35,6 @@ import { mapGetters, mapActions } from "vuex";
 import OrderInfoOverview from "@/components/direct-order/form/review/OrderInfoOverview.vue";
 import OrderTotals from "@/components/direct-order/form/review/OrderTotals.vue";
 import PreviousStepButton from "@/components/direct-order/form/PreviousStepButton.vue"
-import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
@@ -43,7 +42,6 @@ export default {
     OrderTotals,
     PreviousStepButton
   },
-  mixins: [formStepMixin],
   data() {
     return {
       submitting: false,

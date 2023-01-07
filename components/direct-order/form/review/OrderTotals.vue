@@ -55,12 +55,14 @@
 import { mapGetters, mapActions } from "vuex";
 import EditButton from '../EditButton.vue'
 import TipInput from './TipInput.vue'
+import formStepMixin from "@/mixins/order-form/form-step-mixin";
 
 export default {
   components: {
     EditButton,
     TipInput
   },
+  mixins: [formStepMixin],
   data() {
     return {
         tip: 0,
