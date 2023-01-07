@@ -10,7 +10,7 @@
           <EditButton route="/order/direct/form/order-size" />
         </div>
         <span class="flex-1 text-right"
-          >${{ form.size.kolachesCostInCents / 100 }}</span
+          >${{ formatCents(form.size.kolachesCostInCents) }}</span
         >
       </div>
       <span class="ml-10 text-gray-500 text-sm">{{ form.flavors }}</span>
@@ -21,7 +21,7 @@
         <strong class="w-10 text-sm">{{ addon.qty }}</strong>
         <span>{{ addon.name }}</span>
         <span class="flex-1 text-right"
-          >${{ (addon.qty * addon.priceInCents) / 100 }}</span
+          >${{ formatCents(addon.qty * addon.priceInCents) }}</span
         >
       </div>
     </div>
@@ -29,35 +29,23 @@
     <div class="ml-10 mt-10">
       <div class="flex justify-between mt-2">
         <span>Subtotal</span>
-        <span>${{ subtotal / 100 }}</span>
+        <span>${{ formatCents(subtotal) }}</span>
       </div>
       <div class="flex justify-between mt-2">
         <span>Taxes</span>
-        <span>${{ tax / 100 }}</span>
+        <span>${{ formatCents(tax) }}</span>
       </div>
       <div
         v-if="form.delivery.orderType.toLowerCase() === 'delivery'"
         class="flex justify-between mt-2"
       >
         <span>Delivery (10%)</span>
-        <span>${{ deliveryCost / 100 }}</span>
+        <span>${{ formatCents(deliveryCost) }}</span>
       </div>
-      <div class="flex justify-between mt-2">
-        <span>Tip</span>
-        <div class="flex items-center">
-          <span>$</span>
-          <input
-            type="text"
-            v-model="tip"
-            @keypress="onTipInputKeypress"
-            @change="onTipChange"
-            class="ml-3 w-16 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
-          />
-        </div>
-      </div>
+      <TipInput v-model="tip" @change="onTipChange" />
       <div class="flex justify-between mt-8">
         <strong>Total</strong>
-        <strong>${{ total / 100 }}</strong>
+        <strong>${{ formatCents(total) }}</strong>
       </div>
     </div>
   </div>
@@ -66,10 +54,12 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import EditButton from '../EditButton.vue'
+import TipInput from './TipInput.vue'
 
 export default {
   components: {
-    EditButton
+    EditButton,
+    TipInput
   },
   data() {
     return {
@@ -79,42 +69,29 @@ export default {
   computed: {
     ...mapGetters({
       form: "order-form/fields",
+      addonsTotal: "order-form/addonsTotal",
+      subtotal: "order-form/subtotal",
+      deliveryCost: "order-form/deliveryCost",
+      tax: "order-form/tax",
+      total: "order-form/total",
     }),
-    addonsTotal() {
-      return this.form.addons.reduce((t, item) => t + item.qty * item.priceInCents, 0);
-    },
-    subtotal() {
-      return this.addonsTotal + this.form.size.kolachesCostInCents;
-    },
-    deliveryCost() {
-      if (this.form.delivery.orderType.toLowerCase() === "pickup") return 0;
-
-      return 0.1 * this.subtotal;
-    },
-    tax() {
-      return parseInt(0.1175 * this.subtotal, 10)
-    },
-    tipInCents(){
-      return Number(this.tip) * 100
-    },
-    total() {
-      return this.subtotal + this.tax + this.deliveryCost + this.tipInCents
-    },
   },
   methods: {
     ...mapActions({
       update: "order-form/update",
     }),
-    onTipInputKeypress(e) {
-      // Only accept numbers
-      if (!(e.charCode >= 48 && e.charCode <= 57)) e.preventDefault()
-    },
     onTipChange(){
       this.update({
-        tipInCents: this.tipInCents
+        tipInCents: Number(this.tip) * 100
       });
+    },
+    formatCents(cents) {
+      return (cents / 100).toLocaleString()
     }
   },
+  mounted(){
+    this.tip = this.form.tipInCents / 100
+  }
 };
 </script>
 
