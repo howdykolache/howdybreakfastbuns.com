@@ -6,7 +6,7 @@
         v-for="(tipAmount, index) in tipButtons"
         :key="index"
         class="tip-button"
-        :class="{ active: tipPercentEquals(tipAmount) }"
+        :class="{ active: tip.percentage === tipAmount }"
         @click="onTipButtonClicked(tipAmount)"
       >
         {{ tipAmount }}%
@@ -56,7 +56,12 @@ export default {
   methods: {
     onChange(source = 'input') {
       // The change was done by directing using the input
-      if (source === 'input') this.tip.type = 'fixed'
+      if (source === 'input') {
+        // Switch to fixed amount
+        this.tip.type = 'fixed'
+        this.tip.percentage = null
+      }
+
       // The value was changed using the predefined tip buttons
       if (source === 'tip-button') this.tip.type = 'percentage'
 
@@ -76,11 +81,6 @@ export default {
       this.tip.percentage = pct
 
       this.onChange('tip-button');
-    },
-    tipPercentEquals(pct) {
-      // return true if the amount in the tip input equals approximately the argument percent amount
-      let computedTip = (pct / 100) * this.subtotal;
-      return Math.abs(computedTip - this.tip.value) < 100;
     },
     clearTip() {
       this.tip.value = 0;
