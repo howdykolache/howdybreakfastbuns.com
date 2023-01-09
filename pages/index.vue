@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sticky-bar mt-48"></div>
+    <div class="sticky-bar mt-12"></div>
     <section
       class="container mx-auto py-4 mt-12 flex flex-col md:flex-row items-start"
     >

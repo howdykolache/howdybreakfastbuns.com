@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-32 flex flex-col items-center md:flex-row md:items-start">
+  <div class="mt-20 flex flex-col items-center md:flex-row md:items-start">
     <div
       class="md:w-1/2 text-center md:text-left order-2 md:order-1 mt-6 md:m-0"
     >
