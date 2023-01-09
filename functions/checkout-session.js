@@ -133,6 +133,7 @@ const parseOrderData = (order) => {
   const metadata = {
     ...order,
     addons,
+    orderCostInCents
   };
 
   return {
