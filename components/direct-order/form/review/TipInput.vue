@@ -12,7 +12,7 @@
         {{ tipAmount }}%
       </button>
       <button
-        v-show="this.tip != 0"
+        v-show="this.tip.value != 0"
         @click="clearTip"
         class="text-sm text-gray-400 pl-4"
       >
@@ -23,7 +23,7 @@
       <span>$</span>
       <input
         type="text"
-        v-model="tip"
+        v-model="tip.value"
         @keypress="onInputKeypress"
         @change="onChange"
         class="ml-3 w-16 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      tip: this.value,
+      tip: { ...this.value },
       tipButtons: [10, 20, 30],
     };
   },
@@ -54,7 +54,12 @@ export default {
     }),
   },
   methods: {
-    onChange() {
+    onChange(source = 'input') {
+      // The change was done by directing using the input
+      if (source === 'input') this.tip.type = 'fixed'
+      // The value was changed using the predefined tip buttons
+      if (source === 'tip-button') this.tip.type = 'percentage'
+
       this.$emit("input", this.tip);
       this.$emit("change");
     },
@@ -66,16 +71,19 @@ export default {
     },
     onTipButtonClicked(pct) {
       let newTipInCents = (pct / 100) * this.subtotal;
-      this.tip = Math.round(newTipInCents) / 100;
-      this.onChange();
+      this.tip.value = Math.round(newTipInCents) / 100;
+
+      this.tip.percentage = pct
+
+      this.onChange('tip-button');
     },
     tipPercentEquals(pct) {
       // return true if the amount in the tip input equals approximately the argument percent amount
       let computedTip = (pct / 100) * this.subtotal;
-      return Math.abs(computedTip - this.form.tipInCents) < 100;
+      return Math.abs(computedTip - this.tip.value) < 100;
     },
     clearTip() {
-      this.tip = 0;
+      this.tip.value = 0;
       this.onChange();
     },
   },
@@ -83,8 +91,9 @@ export default {
     value: {
         // Re-assign whenever the v-model value gets updated in the parent
         handler: function(newVal){
-            this.tip = newVal
-        }
+            this.tip = { ...newVal }
+        },
+        deep: true
     }
   }
 };
