@@ -12,7 +12,7 @@ export const state = () => ({
       address: '',
       deliveryNotes: '',
     },
-    flavors: '',
+    flavors: 'Howdy Mix',
     size: {
       numberOfPeople: null,
       bunsPerPerson: null,
