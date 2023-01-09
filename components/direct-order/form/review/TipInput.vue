@@ -94,7 +94,7 @@ export default {
 
 <style scoped>
 button.tip-button {
-  @apply border-primary border;
+  @apply border-primary border mr-2;
   font-size: 0.8em;
   border-radius: 5px;
   padding: 0em 1em;
