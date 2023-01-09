@@ -97,7 +97,7 @@ export default {
       return (cents / 100).toLocaleString()
     },
     recomputePercentageTip(){
-      let computedTipAmount = (this.tip.percentage / 100) * this.subtotal
+      let computedTipAmount = (this.form.tipInCents.percentage / 100) * this.subtotal
       // Need it as cents
       computedTipAmount = computedTipAmount * 100 
 
@@ -112,7 +112,7 @@ export default {
   mounted(){
     // If the amount of the tip depends on the subtotal, re-calculate it 
     // whenever this component mounts
-    if (this.tip.type === 'percentage') this.recomputePercentageTip()
+    if (this.form.tipInCents.type === 'percentage') this.recomputePercentageTip()
 
     this.tip = {
       ...this.form.tipInCents,
