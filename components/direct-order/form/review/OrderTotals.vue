@@ -1,22 +1,19 @@
 <template>
   <div class="mt-10">
-    <span class="label">ORDER DETAILS</span>
+    <div class="flex items-center">
+      <span class="label">ORDER DETAILS</span>
+      <EditButton route="/order/direct/form/order-size" next="" />
+    </div>
     <!-- Items -->
     <div class="mt-3">
       <div class="flex items-center">
         <strong class="w-10 text-sm">{{ form.size.dozens }}</strong>
-        <div class="flex items-center">
-          <span>Howdy Breakfast Buns (dozen)</span>
-          <EditButton route="/order/direct/form/order-size" />
-        </div>
+        <span>Howdy Breakfast Buns (dozen)</span>
         <span class="flex-1 text-right"
           >${{ formatCents(form.size.kolachesCostInCents) }}</span
         >
       </div>
-      <div class="flex items-center">
-        <span class="ml-10 text-gray-500 text-sm">{{ form.flavors }}</span>
-        <EditButton route="/order/direct/form/flavors" />
-      </div>
+      <span class="ml-10 text-gray-500 text-sm">{{ form.flavors }}</span>
     </div>
     <!-- Addons -->
     <div v-for="(addon, index) in form.addons" :key="index" class="mt-3">

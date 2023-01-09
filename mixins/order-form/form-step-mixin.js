@@ -25,8 +25,10 @@ export default {
     },
     next() {
       let route = this.nextStepRoute
-      // Redirect back to review page when editing
-      if(this.inEditMode) route = "/order/direct/form/review"
+      // Redirect back to the specified page when done editing
+      if(this.inEditMode && this.$route.query.next) {
+        route = this.$route.query.next
+      }
 
       this.$router.push(route);
     },
