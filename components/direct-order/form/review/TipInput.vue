@@ -55,6 +55,8 @@ export default {
   },
   methods: {
     onChange() {
+      this.tip = Math.round(this.tip * 100) / 100
+
       this.$emit("input", this.tip);
       this.$emit("change");
     },
