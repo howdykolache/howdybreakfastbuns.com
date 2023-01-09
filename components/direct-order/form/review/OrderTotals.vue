@@ -98,8 +98,6 @@ export default {
     },
     recomputePercentageTip(){
       let computedTipAmount = (this.form.tipInCents.percentage / 100) * this.subtotal
-      // Need it as cents
-      computedTipAmount = computedTipAmount * 100 
 
       this.update({
         tipInCents: {
