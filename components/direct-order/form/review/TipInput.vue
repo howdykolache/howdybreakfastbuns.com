@@ -25,7 +25,7 @@
         type="text"
         v-model="tip.value"
         @keypress="onInputKeypress"
-        @change="onChange"
+        @change="onChange('input')"
         class="ml-3 w-16 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
       />
     </div>
