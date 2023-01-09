@@ -13,7 +13,10 @@
           >${{ formatCents(form.size.kolachesCostInCents) }}</span
         >
       </div>
-      <span class="ml-10 text-gray-500 text-sm">{{ form.flavors }}</span>
+      <div class="flex items-center">
+        <span class="ml-10 text-gray-500 text-sm">{{ form.flavors }}</span>
+        <EditButton route="/order/direct/form/flavors" />
+      </div>
     </div>
     <!-- Addons -->
     <div v-for="(addon, index) in form.addons" :key="index" class="mt-3">
