@@ -72,6 +72,8 @@ export const getters = {
     return Math.round(0.1175 * getters.subtotal)
   },
   total(state, getters) {
-    return getters.subtotal + getters.tax + getters.deliveryCost + state.fields.tipInCents.value
+    const total =  getters.subtotal + getters.tax + getters.deliveryCost + state.fields.tipInCents.value
+
+    return Math.round(total)
   },
 };
