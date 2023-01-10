@@ -123,17 +123,22 @@ export default {
   mounted() {
     this.fields.numberOfPeople = this.form.size.numberOfPeople
     this.fields.bunsPerPerson = this.form.size.bunsPerPerson
-    this.fields.dozens = this.form.size.dozens
+    this.fields.dozens = this.form.size.dozens || 1
   },
   watch: {
     "fields.numberOfPeople": {
-      handler: function () {
+      handler: function (newValue, oldValue) {
+        // Ignore the initial assignment/change
+        if (oldValue === null) return 
+
         this.fields.dozens = this.recommendedDozens;
         this.onChange();
       },
     },
     "fields.bunsPerPerson": {
-      handler: function () {
+      handler: function (newValue, oldValue) {
+        if (oldValue === null) return 
+
         this.fields.dozens = this.recommendedDozens;
         this.onChange();
       },
