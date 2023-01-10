@@ -65,6 +65,10 @@ export default {
       if (!((e.charCode >= 48 && e.charCode <= 57) || e.charCode == 46)) {
         e.preventDefault();
       }
+      // Prevent entering multiple commas
+      if (e.charCode == 46 && this.tip.toString().includes('.')) {
+        e.preventDefault()
+      }
     },
     onTipButtonClicked(pct) {
       let newTipInCents = (pct / 100) * this.subtotal;
