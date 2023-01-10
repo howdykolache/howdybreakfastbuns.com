@@ -67,6 +67,7 @@ export default {
         flavors: this.form.flavors,
         addons: this.form.addons,
         tipInCents: this.form.tipInCents || 0,
+        total: this.total,
       };
     },
   },
