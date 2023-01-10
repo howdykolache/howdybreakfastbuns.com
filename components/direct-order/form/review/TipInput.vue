@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between mt-2">
     <div>
-      <span class="mr-4"> Tip </span>
+      <span class="mr-3"> Tip </span>
       <button
         v-for="(tipAmount, index) in tipButtons"
         :key="index"
@@ -14,7 +14,7 @@
       <button
         v-show="this.tip != 0"
         @click="clearTip"
-        class="text-sm text-gray-400 pl-4"
+        class="text-sm text-gray-400 ml-3"
       >
         clear
       </button>
@@ -26,7 +26,7 @@
         v-model="tip"
         @keypress="onInputKeypress"
         @change="onChange"
-        class="ml-3 w-16 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
+        class="ml-3 w-16 h-7 border border-gray-300 text-center focus:border-gray-500 focus:outline-none"
       />
     </div>
   </div>
