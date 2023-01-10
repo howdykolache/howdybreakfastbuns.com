@@ -66,7 +66,7 @@ export default {
         dozens: this.form.size.dozens,
         flavors: this.form.flavors,
         addons: this.form.addons,
-        tipInCents: this.form.tipInCents || 0,
+        tipInCents: this.form.tipInCents.value || 0,
         total: this.total,
       };
     },

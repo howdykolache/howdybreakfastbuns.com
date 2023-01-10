@@ -65,7 +65,10 @@ export default {
   mixins: [formStepMixin],
   data() {
     return {
-        tip: 0,
+        tip: {
+          type: 'fixed',
+          value: 0
+        },
     };
   },
   computed: {
@@ -84,15 +87,35 @@ export default {
     }),
     onTipChange(){
       this.update({
-        tipInCents: Number(this.tip) * 100
+        tipInCents: {
+          ...this.tip,
+          value: Number(this.tip.value) * 100
+        }
       });
     },
     formatCents(cents) {
       return (cents / 100).toLocaleString()
+    },
+    recomputePercentageTip(){
+      let computedTipAmount = (this.form.tipInCents.percentage / 100) * this.subtotal
+
+      this.update({
+        tipInCents: {
+          ...this.form.tipInCents,
+          value: computedTipAmount
+        }
+      })
     }
   },
   mounted(){
-    this.tip = this.form.tipInCents / 100
+    // If the amount of the tip depends on the subtotal, re-calculate it 
+    // whenever this component mounts
+    if (this.form.tipInCents.type === 'percentage') this.recomputePercentageTip()
+
+    this.tip = {
+      ...this.form.tipInCents,
+      value: this.form.tipInCents.value / 100 
+    }
   }
 };
 </script>
