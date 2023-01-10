@@ -38,6 +38,38 @@ export default {
       const date = moment(this.order.date, 'MM/DD/YYYY').format('MMM DD')
 
       return `${this.order.deliveryTime} on ${date}`
+    },
+    emailSubject(){
+      return `[Howdy Breakfast Buns] A new order was placed by ${this.order.name}`
+    },
+    emailBody(){
+      let bodyHtml = `
+      <h4>Order information:</h4>
+      `
+
+      for (let key in this.order) {
+        let value = this.order[key]
+
+        if (key === 'orderCostInCents') {
+          key = 'total'
+          if (parseInt(value) > 0) value = parseInt(value) /100
+        }        
+        
+        if (key === 'tipInCents') {
+          key = 'tip'
+          if (parseInt(value) > 0) value = parseInt(value) /100
+        }
+
+        bodyHtml += `
+        <span>
+          <strong>${key}: </strong>
+          <span>${value} </span>
+        </span>
+        <br>
+        `
+      }
+
+      return bodyHtml
     }
   },
   methods: {
@@ -48,12 +80,31 @@ export default {
         const res =await fetch(`/.netlify/functions/get-checkout-session-metadata?session_id=${this.sessionId}`)
         if (res.status === 200) {
           this.order = await res.json()
+          this.sendEmailNotification()
         }
       } catch (error) {
         console.error(error)
       }
 
       this.loading = false
+    }, 
+    async sendEmailNotification(){
+      try {
+        const reqConfig = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            subject: this.emailSubject,
+            body: this.emailBody
+          })
+        }
+
+        await fetch('/.netlify/functions/send-email', reqConfig)
+      } catch (error) {
+        console.error(error)
+      }
     }
   },
   mounted(){

@@ -12,7 +12,7 @@ export const state = () => ({
       address: '',
       deliveryNotes: '',
     },
-    flavors: '',
+    flavors: 'Howdy Mix',
     size: {
       numberOfPeople: null,
       bunsPerPerson: null,
@@ -66,10 +66,10 @@ export const getters = {
   deliveryCost(state, getters) {
     if (state.fields.delivery.orderType.toLowerCase() === "pickup") return 0;
 
-    return 0.1 * getters.subtotal;
+    return Math.round(0.1 * getters.subtotal);
   },
   tax(state, getters) {
-    return parseInt(0.1175 * getters.subtotal, 10)
+    return Math.round(0.1175 * getters.subtotal)
   },
   total(state, getters) {
     return getters.subtotal + getters.tax + getters.deliveryCost + state.fields.tipInCents.value

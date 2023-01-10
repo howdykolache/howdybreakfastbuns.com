@@ -1,14 +1,14 @@
 <template>
   <div class="mt-10">
-    <span class="label">ORDER DETAILS</span>
+    <div class="flex items-center">
+      <span class="label">ORDER DETAILS</span>
+      <EditButton route="/order/direct/form/order-size" next="" />
+    </div>
     <!-- Items -->
     <div class="mt-3">
       <div class="flex items-center">
         <strong class="w-10 text-sm">{{ form.size.dozens }}</strong>
-        <div class="flex items-center">
-          <span>Howdy Breakfast Buns (dozen)</span>
-          <EditButton route="/order/direct/form/order-size" />
-        </div>
+        <span>Howdy Breakfast Buns (dozen)</span>
         <span class="flex-1 text-right"
           >${{ formatCents(form.size.kolachesCostInCents) }}</span
         >
@@ -26,8 +26,8 @@
       </div>
     </div>
     <!-- Subtotal -->
-    <div class="ml-10 mt-10">
-      <div class="flex justify-between mt-2">
+    <div class="mt-10">
+      <div class="flex justify-between mt-2 mb-10">
         <span>Subtotal</span>
         <span>${{ formatCents(subtotal) }}</span>
       </div>

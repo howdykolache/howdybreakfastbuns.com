@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between mt-2">
     <div>
-      <span class="mr-4"> Tip </span>
+      <span class="mr-3"> Tip </span>
       <button
         v-for="(tipAmount, index) in tipButtons"
         :key="index"
@@ -14,7 +14,7 @@
       <button
         v-show="this.tip.value != 0"
         @click="clearTip"
-        class="text-sm text-gray-400 pl-4"
+        class="text-sm text-gray-400 ml-3"
       >
         clear
       </button>
@@ -26,7 +26,7 @@
         v-model="tip.value"
         @keypress="onInputKeypress"
         @change="onChange('input')"
-        class="ml-3 w-16 h-7 border border-gray-400 text-center focus:border-gray-500 focus:outline-none"
+        class="ml-3 w-16 h-7 border border-gray-300 text-center focus:border-gray-500 focus:outline-none"
       />
     </div>
   </div>
@@ -55,6 +55,8 @@ export default {
   },
   methods: {
     onChange(source = 'input') {
+      this.tip.value = Math.round(this.tip.value * 100) / 100
+
       // The change was done by directing using the input
       if (source === 'input') {
         // Switch to fixed amount
@@ -72,6 +74,10 @@ export default {
       // Only accept numbers and period for decimal (46)
       if (!((e.charCode >= 48 && e.charCode <= 57) || e.charCode == 46)) {
         e.preventDefault();
+      }
+      // Prevent entering multiple commas
+      if (e.charCode == 46 && this.tip.toString().includes('.')) {
+        e.preventDefault()
       }
     },
     onTipButtonClicked(pct) {
@@ -101,7 +107,7 @@ export default {
 
 <style scoped>
 button.tip-button {
-  @apply border-primary border;
+  @apply border-primary border mr-2;
   font-size: 0.8em;
   border-radius: 5px;
   padding: 0em 1em;

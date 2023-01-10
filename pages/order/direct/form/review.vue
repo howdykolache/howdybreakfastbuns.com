@@ -15,7 +15,7 @@
             @click="submit"
             class="btn btn-primary w-full p-3 mt-10"
           >
-            PAY
+            PAY {{ this.total | formatCents }}
           </button>
           <PreviousStepButton />
         </div>
@@ -51,6 +51,7 @@ export default {
   computed: {
     ...mapGetters({
       form: "order-form/fields",
+      total: "order-form/total"
     }),
     payload() {
       return {
@@ -66,6 +67,7 @@ export default {
         flavors: this.form.flavors,
         addons: this.form.addons,
         tipInCents: this.form.tipInCents.value || 0,
+        total: this.total,
       };
     },
   },

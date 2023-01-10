@@ -92,32 +92,6 @@ const createSession = async (order) => {
 };
 
 const parseOrderData = (order) => {
-  let orderCostInCents = 0;
-
-  // Kolaches
-  orderCostInCents = 5900 * order.dozens;
-
-  // Addons
-  order.addons.forEach((addon) => {
-    const item = ADDONS.find((a) => a.id === addon.id);
-
-    orderCostInCents += item.priceInCents * addon.qty;
-  });
-
-  // The subtotal
-  const subtotal = orderCostInCents;
-
-  // Shipping
-  if (order.orderType.toLowerCase() === "delivery") {
-    orderCostInCents += 0.1 * subtotal;
-  }
-
-  // Tax
-  orderCostInCents += parseInt(0.1175 * subtotal, 10);
-
-  // Tip
-  orderCostInCents += order.tipInCents
-
   // Convert the addons array into a comma separated addon names
   // Apparently, Stripe’s metadata property doesn’t allow arrays
   let addons = "";
@@ -132,7 +106,7 @@ const parseOrderData = (order) => {
 
   const metadata = {
     ...order,
-    addons,
+    addons
   };
 
   return {
@@ -143,7 +117,7 @@ const parseOrderData = (order) => {
           product_data: {
             name: "Howdy Breakfast Buns",
           },
-          unit_amount: orderCostInCents,
+          unit_amount: order.total,
         },
         quantity: 1,
       },
