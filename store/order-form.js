@@ -63,7 +63,7 @@ export const getters = {
   deliveryCost(state, getters) {
     if (state.fields.delivery.orderType.toLowerCase() === "pickup") return 0;
 
-    return 0.1 * getters.subtotal;
+    return Math.round(0.1 * getters.subtotal);
   },
   tax(state, getters) {
     return parseInt(0.1175 * getters.subtotal, 10)
