@@ -26,7 +26,7 @@
       </div>
     </div>
     <!-- Subtotal -->
-    <div class="ml-10 mt-10">
+    <div class="mt-10">
       <div class="flex justify-between mt-2">
         <span>Subtotal</span>
         <span>${{ formatCents(subtotal) }}</span>
