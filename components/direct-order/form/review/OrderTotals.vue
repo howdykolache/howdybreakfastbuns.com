@@ -112,9 +112,13 @@ export default {
     // whenever this component mounts
     if (this.form.tipInCents.type === 'percentage') this.recomputePercentageTip()
 
+    let tipWithDecimals = this.form.tipInCents.value / 100 
+    // Only need up to 2 decimal points
+    tipWithDecimals = Math.round(tipWithDecimals * 100) / 100
+
     this.tip = {
       ...this.form.tipInCents,
-      value: this.form.tipInCents.value / 100 
+      value: tipWithDecimals
     }
   }
 };
