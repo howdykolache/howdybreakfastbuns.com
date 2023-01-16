@@ -24,6 +24,7 @@
 
 <script>
 import moment from 'moment'
+import sendEmail from '../helpers/email'
 
 export default {
   data() {
@@ -80,32 +81,14 @@ export default {
         const res =await fetch(`/.netlify/functions/get-checkout-session-metadata?session_id=${this.sessionId}`)
         if (res.status === 200) {
           this.order = await res.json()
-          this.sendEmailNotification()
+          sendEmail(this.emailSubject, this.emailBody)
         }
       } catch (error) {
         console.error(error)
       }
 
       this.loading = false
-    }, 
-    async sendEmailNotification(){
-      try {
-        const reqConfig = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            subject: this.emailSubject,
-            body: this.emailBody
-          })
-        }
-
-        await fetch('/.netlify/functions/send-email', reqConfig)
-      } catch (error) {
-        console.error(error)
-      }
-    }
+    },
   },
   mounted(){
     // Redirect to the home if session id is not included in the url
