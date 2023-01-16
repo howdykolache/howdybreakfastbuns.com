@@ -1,12 +1,7 @@
 import { mapGetters, mapActions } from "vuex";
-import moment from 'moment'
+import { persistentformData } from '@/helpers/order-form-persistence'
 
 export default {
-  data() {
-    return {
-      localStorageItemKey: 'orderForm'
-    }
-  },
   computed: {
     ...mapGetters({
       form: "order-form/fields",
@@ -32,23 +27,10 @@ export default {
 
       this.$router.push(route);
     },
-    saveFormDataInLocalStorage (formFields) {
-      const value = JSON.stringify({
-        updatedAt: moment().unix(),
-        data: { ...formFields }
-      })
-
-      localStorage.setItem(this.localStorageItemKey, value)
-    },
-    getFormDataFromLocalStorage(){
-      const value = localStorage.getItem(this.localStorageItemKey)
-
-      return value ? JSON.parse(value) : null
-    },
   },
   mounted() {
     // Retrieve previously saved form data from the local storage
-    const formDataFromLocalStorage = this.getFormDataFromLocalStorage()
+    const formDataFromLocalStorage = persistentformData.get()
     // If there’s indeed previous values, overwrite current store with these values 
     if (formDataFromLocalStorage) {
       // Note: this will only overwrite state.fields properly, the rest of the state won;t be affected 
@@ -61,7 +43,7 @@ export default {
       // (which maps to the “fields” property in order-form.js’s state)
       handler: function (newValue) {
         // Save the new value in local storage
-        this.saveFormDataInLocalStorage(newValue)
+        persistentformData.set(newValue)
       },
       deep: true
     }
