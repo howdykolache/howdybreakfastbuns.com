@@ -8,24 +8,24 @@ const init = () => {
 
   const methods =  {
     set(data) {
-      let value = this.get();
+      let form = this.get();
 
-      if (!value) {
+      if (!form) {
         // This is the first initialization
-        value = { initializedAt: moment().unix() };
+        form = { initializedAt: moment().unix() };
       }
 
-      value.updatedAt = moment().unix();
-      value.data = { ...data };
+      form.updatedAt = moment().unix();
+      form.data = { ...data };
 
-      localStorage.setItem(localStorageItemKey, JSON.stringify(value));
+      localStorage.setItem(localStorageItemKey, JSON.stringify(form));
 
       this.initTimeoutTimer()
     },
     get() {
-      const value = localStorage.getItem(localStorageItemKey);
+      const form = localStorage.getItem(localStorageItemKey);
 
-      return value ? JSON.parse(value) : null;
+      return form ? JSON.parse(form) : null;
     },
     initTimeoutTimer() {
       const sentNotificationEmail = this.getMeta('sentNotificationEmail', false)
