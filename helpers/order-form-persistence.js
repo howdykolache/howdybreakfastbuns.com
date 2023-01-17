@@ -28,30 +28,55 @@ const init = () => {
       return value ? JSON.parse(value) : null;
     },
     initTimeoutTimer() {
-      let form = this.get();
+      const sentNotificationEmail = this.getMeta('sentNotificationEmail', false)
+      const initializedAt = this.getMeta('initializedAt')
 
       // Check if we have already sent the email
-      if (!form || form.sentNotificationEmail) return
+      if (sentNotificationEmail) return
 
       // Timer is already set
       if (timerId) return
 
-      const secondsSinceInitialization = moment().unix() - form.initializedAt;
+      const secondsSinceInitialization = moment().unix() - initializedAt;
 
       let remainingtimeBeforeTimeoutInMs = (timeoutInSec - secondsSinceInitialization) * 1000;
       if (remainingtimeBeforeTimeoutInMs < 0) remainingtimeBeforeTimeoutInMs = 0;
 
       timerId = setTimeout(() => {  
         // We don’t want to send another email again until the next initialization
-        form = this.get();
-        form.sentNotificationEmail = true;
-        localStorage.setItem(localStorageItemKey, JSON.stringify(form));
+        this.setMeta('sentNotificationEmail', true)
 
         sendEmail(
           "[Howdy Breakfast Buns] Abandoned cart", 
-          buildEmailHTMLBody(form)
+          buildEmailHTMLBody(this.getMeta('data'))
         );
       }, remainingtimeBeforeTimeoutInMs);
+    },
+    setMeta(name, value){
+      const form = this.get();
+
+      if(!form) {
+        console.log(`Cannot set ${name} because the form has not been initialized`)
+        return
+      }
+
+      form[name] = value;
+
+      localStorage.setItem(localStorageItemKey, JSON.stringify(form));
+    },    
+    getMeta(name, defaultFallbackValue){
+      const form = this.get();
+
+      if(!form) {
+        console.log(`The form has not been initialized yet`)
+        return
+      }
+
+      if(typeof form[name] !== 'undefined') {
+        return form[name]
+      } else {
+        return defaultFallbackValue
+      }
     },
   };
 
@@ -64,11 +89,11 @@ const buildEmailHTMLBody = (form) => {
   let html = `<h4>Abandoned cart:</h4>`;
 
   const fields = {
-    ...form.data.contact,
-    ...form.data.delivery,
-    addons: form.data.addons,
-    flavors: form.data.flavors,
-    dozens: form.data.size.dozens,
+    ...form.contact,
+    ...form.delivery,
+    addons: form.addons,
+    flavors: form.flavors,
+    dozens: form.size.dozens,
   };
 
   for (let key in fields) {
