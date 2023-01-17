@@ -85,15 +85,15 @@ const init = () => {
 
 const persistentformData = init();
 
-const buildEmailHTMLBody = (form) => {
+const buildEmailHTMLBody = (data) => {
   let html = `<h4>Abandoned cart:</h4>`;
 
   const fields = {
-    ...form.contact,
-    ...form.delivery,
-    addons: form.addons,
-    flavors: form.flavors,
-    dozens: form.size.dozens,
+    ...data.contact,
+    ...data.delivery,
+    addons: data.addons,
+    flavors: data.flavors,
+    dozens: data.size.dozens,
   };
 
   for (let key in fields) {
