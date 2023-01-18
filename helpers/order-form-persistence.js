@@ -3,7 +3,7 @@ import sendEmail from "./email";
 
 const init = () => {
   const localStorageItemKey = "orderForm";
-  const timeoutInSec = 35;
+  const timeoutInSec = 20 * 60;
   const version = 1 // We’ll increase this whenever we make breaking changes
   let timerId = null;
 
