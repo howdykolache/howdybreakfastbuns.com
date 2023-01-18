@@ -25,6 +25,7 @@
 <script>
 import moment from 'moment'
 import sendEmail from '../helpers/email'
+import { persistentformData } from '@/helpers/order-form-persistence'
 
 export default {
   data() {
@@ -82,6 +83,7 @@ export default {
         if (res.status === 200) {
           this.order = await res.json()
           sendEmail(this.emailSubject, this.emailBody)
+          persistentformData.clear()
         }
       } catch (error) {
         console.error(error)

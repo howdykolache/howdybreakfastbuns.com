@@ -31,6 +31,9 @@ const init = () => {
 
       return form ? JSON.parse(form) : null;
     },
+    clear() {
+      localStorage.setItem(localStorageItemKey, null);
+    },
     initTimeoutTimer() {
       const sentNotificationEmail = this.getMeta('sentNotificationEmail', false)
       const initializedAt = this.getMeta('initializedAt')
