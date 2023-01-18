@@ -6,14 +6,14 @@
     <section class="mt-8 flex flex-col items-start lg:mt-16 md:flex-row">
       <div class="text-xl md:w-1/2">
         <p>
-          Are you ready to make a change towards employee happiness in 2023?
+          Do you want to invest in employee happiness in 2023?
         </p>
         <p>
-          For about $20/month per employee, we’ll drop off amazing breakfast
+          For about <span class="text-highlight">$20</span> per month per employee, Howdy drops off amazing breakfast
           sandwiches for your team every week!
         </p>
         <p>
-          Build amazing culture and give your team a reason to be excited to
+          Build amazing culture &amp; give your team a reason to be excited to
           come into the office!
         </p>
       </div>
@@ -30,16 +30,16 @@
                 <p>Every Thurs at 9am? You got it!</p>
                 <p>You pick the day & time - We’ll make sure your team gets their day started right with Howdy Breakfast Buns. Set it and forget it!</p>
                 <div class="flex items-center">
-                    <button class="btn btn-primary text-sm">LEARN MORE</button>
+                    <a target='_blank' :href='mailToString' class="btn btn-primary text-sm">LEARN MORE</a>
                     <span class="text-gray-400 ml-2">Around $20/month/employee</span>
                 </div>
-            </div>            
+            </div>
             <div class="mt-6 border-2 border-primary p-4 lg:w-6/12 lg:mt-0">
                 <h4 class="text-highlight text-2xl font-bold">MONTHLY</h4>
                 <p>Celebrate monthly birthdays or events.</p>
                 <p>We’ll ask you each month what day is best to get your team excited for a great breakfast!</p>
                 <div class="flex items-center">
-                    <button class="btn btn-primary text-sm">LEARN MORE</button>
+                    <a target='_blank' :href='mailToString' class="btn btn-primary text-sm">LEARN MORE</a>
                     <span class="text-gray-400 ml-2">Around $5/month/employee</span>
                 </div>
             </div>
@@ -47,6 +47,30 @@
     </section>
   </main>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      mailTo: 'howdy@howdybreakfastbuns.com',
+      subject: 'Interested in hearing more about weekly or monthly Howdy Breakfast Buns for our group! 😊'.replaceAll(' ', '%20'),
+      body: 'Hi Eric!%0A%0A' +
+            'I would like to learn more more about weekly or monthly Howdy Breakfast Buns for our group!%0A%0A' +
+            'Name:%0A' +
+            'Phone:%0A' +
+            'Company or organization:%0A' +
+            'Weekly or monthly:%0A' +
+            'Number of team members:%0A' +
+            'Address:%0A'
+    }
+  },
+  computed: {
+    mailToString() {
+      return 'mailto:' + this.mailTo + '?subject=' + this.subject + '&body=' + this.body
+    }
+  }
+}
+</script>
 
 <style>
 .featured-plan-label{
