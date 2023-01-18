@@ -103,9 +103,14 @@ export default {
 
       for (const key in this.addons) {
         const addon = this.addons[key];
+        // Remove parentheses & everything between them
+        let name = addon.name.replace(/\([^)]*\)/g, '').trim()
+        // Indicate qty
+        name += ` (x${addon.value})`
+
         if (parseInt(addon.value)) {
           res.push({
-            name: addon.name,
+            name,
             qty: Number(addon.value),
             priceInCents: addon.priceInCents,
             id: addon.id,
