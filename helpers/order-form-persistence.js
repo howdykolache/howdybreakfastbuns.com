@@ -4,6 +4,7 @@ import sendEmail from "./email";
 const init = () => {
   const localStorageItemKey = "orderForm";
   const timeoutInSec = 35;
+  const version = 1 // We’ll increase this whenever we make breaking changes
   let timerId = null;
 
   const methods =  {
@@ -12,7 +13,10 @@ const init = () => {
 
       if (!form) {
         // This is the first initialization
-        form = { initializedAt: moment().unix() };
+        form = { 
+          initializedAt: moment().unix(),
+          version
+        };
       }
 
       form.updatedAt = moment().unix();
@@ -30,6 +34,8 @@ const init = () => {
     initTimeoutTimer() {
       const sentNotificationEmail = this.getMeta('sentNotificationEmail', false)
       const initializedAt = this.getMeta('initializedAt')
+
+      if(!initializedAt) return
 
       // Check if we have already sent the email
       if (sentNotificationEmail) return
@@ -79,6 +85,11 @@ const init = () => {
       }
     },
   };
+
+  // Reset if it’s an old version
+  if(methods.get() && methods.get().version != version) {
+    localStorage.setItem(localStorageItemKey, null);
+  }
 
   return methods
 };
