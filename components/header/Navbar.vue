@@ -1,12 +1,12 @@
 <template>
   <nav class="flex justify-between items-center">
-    <a href="/">
+    <nuxt-link to="/">
       <img
         src="~/assets/img/logo.svg"
         alt="Howdy breakfast buns"
         class="w-20 lg:w-28"
       />
-    </a>
+    </nuxt-link>
     <div class="flex items-center">
       <nuxt-link to="/employee-perks" class="btn btn-secondary text-xs md:text-sm">EMPLOYEE PERKS</nuxt-link >
       <nuxt-link to="/menu" class="btn btn-secondary text-xs md:text-sm">MENU</nuxt-link >
