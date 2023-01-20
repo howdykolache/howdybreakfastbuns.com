@@ -53,12 +53,17 @@ const buildEmail = (data) => {
   const formattedDate = moment(data.date, "MM/DD/YYYY").format("MM/DD");
   const dateTime = `${data.deliveryTime} on ${formattedDate}`;
   // Address
-  let address = "";
+  let addressAndNotes = "";
   if (data.orderType.toLowerCase() === "delivery") {
-    address = `
+    addressAndNotes = `
     Address:
     ${data.address}
     `;
+
+    if (data.deliveryNotes) {
+        addressAndNotes += `\n    Delivery Instructions:\n    ${data.deliveryNotes}
+        `
+    }
   }
   // Items
   let lineItems = `${data.dozens}x Howdy Breakfast Buns (dozen): ${data.flavors}`
@@ -85,7 +90,7 @@ const buildEmail = (data) => {
 
     Order Type:
     ${data.orderType}
-    ${address}
+    ${addressAndNotes}
     Order Details:
     ${lineItems}
 
