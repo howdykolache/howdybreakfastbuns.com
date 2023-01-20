@@ -42,6 +42,9 @@ const createSession = async (order) => {
       cancel_url: `${BASE_URL}/catering-payment-error`,
       line_items,
       metadata,
+      payment_intent_data: {
+        metadata
+      },
       mode: "payment",
     });
   } catch (error) {
