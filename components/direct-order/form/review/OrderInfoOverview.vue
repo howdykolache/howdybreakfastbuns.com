@@ -39,7 +39,7 @@
         >
           817 W Fulton Market
         </span>
-        <span>{{ form.delivery.address }}</span>
+        <span v-else>{{ form.delivery.address }}</span>
       </div>
     </div>
     <div 
