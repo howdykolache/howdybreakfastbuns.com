@@ -106,7 +106,7 @@ export default {
         // Remove parentheses & everything between them
         let name = addon.name.replace(/\([^)]*\)/g, '').trim()
         // Indicate qty
-        name += ` (x${addon.value})`
+        name = `${addon.value}x ${name}`
 
         if (parseInt(addon.value)) {
           res.push({

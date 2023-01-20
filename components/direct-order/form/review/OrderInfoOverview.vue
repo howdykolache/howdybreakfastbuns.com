@@ -39,8 +39,18 @@
         >
           817 W Fulton Market
         </span>
-        <span>{{ form.delivery.address }}</span>
+        <span v-else>{{ form.delivery.address }}</span>
       </div>
+    </div>
+    <div 
+      v-if="form.delivery.deliveryNotes && form.delivery.orderType.toLowerCase() === 'delivery'" 
+      class="mt-5 flex flex-col"
+    >
+      <div class="flex items-center">
+        <span class="label">Delivery Instructions</span>
+        <EditButton route="/order/direct/form/order-date" />
+      </div>
+      <span>{{ form.delivery.deliveryNotes }}</span>
     </div>
   </div>
 </template>
