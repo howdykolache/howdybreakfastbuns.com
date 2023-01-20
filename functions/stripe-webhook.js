@@ -44,7 +44,7 @@ exports.handler = async (event, context) => {
 
   return {
     statusCode: 200,
-    body: "Received!",
+    body: JSON.stringify(orderData),
   };
 };
 
