@@ -56,44 +56,48 @@ const buildEmail = (data) => {
   let addressAndNotes = "";
   if (data.orderType.toLowerCase() === "delivery") {
     addressAndNotes = `
-    Address:
-    ${data.address}
+    <strong>Address:</strong></br>
+    ${data.address}</br></br>
     `;
 
     if (data.deliveryNotes) {
-        addressAndNotes += `\n    Delivery Instructions:\n    ${data.deliveryNotes}
+        addressAndNotes += `
+        <strong>Delivery Instructions:</strong></br>
+        ${data.deliveryNotes}
+        </br></br>
         `
     }
   }
   // Items
   let lineItems = `${data.dozens}x Howdy Breakfast Buns (dozen): ${data.flavors}`
   data.addons.split(',').forEach(addon => {
-    lineItems += `\n    ${addon.trim()}`
+    lineItems += `</br>${addon.trim()}`
   });
 
   const subject = `Howdy Online Order Confirmation: ${data.name} on ${formattedDate}`;
 
   const body = `
     Wooohooo! Thank you for ordering Howdy Breakfast Buns, ${data.name}! 
-
+    </br></br>
     We are excited to serve you. 🥳
-
+    </br></br>
     Your order details are below.
-
-    Date and Time:
+    </br></br>
+    <strong>Date and Time:</strong></br>
     ${dateTime}
-
-    Contact:
-    ${data.name}
-    ${data.email}
-    ${data.phoneNumber}
-
-    Order Type:
+    </br></br>
+    <strong>Contact:</strong></br>
+    ${data.name}</br>
+    ${data.email}</br>
+    ${data.phoneNumber}</br>
+    </br>
+    <strong>Order Type:</strong></br>
     ${data.orderType}
+    </br></br>
     ${addressAndNotes}
-    Order Details:
+    <strong>Order Details:</strong></br>
     ${lineItems}
-
+    </br></br>
     Have an amazing day! 😊😊😊
     `;
 
@@ -117,7 +121,7 @@ const sendEmailTo = async (email, subject, body) => {
     from: process.env.MAIL_FROM,
     to: email,
     subject,
-    text: body,
+    html: body,
   });
 
   console.log("Message sent: %s", info.messageId);
