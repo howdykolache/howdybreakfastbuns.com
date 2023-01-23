@@ -41,6 +41,8 @@ exports.handler = async (event, context) => {
 
   // Send notification email to ourselves 
   await sendEmailTo(process.env.MAIL_NOTIFICATION, subject, body);
+  // To the user
+  await sendEmailTo(orderData.email, subject, body);
 
   return {
     statusCode: 200,
