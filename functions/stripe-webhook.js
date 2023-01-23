@@ -119,7 +119,7 @@ const sendEmailTo = async (email, subject, body) => {
 
   let info = await transporter.sendMail({
     from: process.env.MAIL_FROM,
-    to: 'yassinrsc@gmail.com',
+    to: email,
     subject,
     html: body,
   });
