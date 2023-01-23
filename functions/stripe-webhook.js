@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
   const { subject, body } = buildEmail(orderData);
 
   // Send notification email to ourselves 
-  sendEmailTo(process.env.MAIL_NOTIFICATION, subject, body);
+  await sendEmailTo(process.env.MAIL_NOTIFICATION, subject, body);
 
   return {
     statusCode: 200,
