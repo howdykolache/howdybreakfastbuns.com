@@ -40,11 +40,11 @@ exports.handler = async (event, context) => {
   const { subject, body } = buildEmail(orderData);
 
   // Send notification email to ourselves 
-  const info = await sendEmailTo(process.env.MAIL_NOTIFICATION, subject, body);
+  sendEmailTo(process.env.MAIL_NOTIFICATION, subject, body);
 
   return {
     statusCode: 200,
-    body: JSON.stringify(info),
+    body: "Received!",
   };
 };
 
@@ -123,8 +123,6 @@ const sendEmailTo = async (email, subject, body) => {
     subject,
     html: body,
   });
-
-  return info
 
   console.log("Message sent: %s", info.messageId);
 };
