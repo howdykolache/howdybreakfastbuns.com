@@ -109,7 +109,7 @@ export default {
       return this.fields.numberOfPeople && this.fields.bunsPerPerson;
     },
     canProceed() {
-      return this.fields.dozens;
+      return this.fields.numberOfPeople && this.fields.bunsPerPerson && Number(this.fields.dozens)
     },
     dataToCommit(){
       return {
