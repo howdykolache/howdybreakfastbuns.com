@@ -26,7 +26,7 @@
           co-working spaces.
         </p>
         <p>Your coworkers will thank you!</p>
-        <a href="" class="mt-3 inline-block btn btn-primary">Request info</a>
+        <a href="mailto:howdy@howdybreakfastbuns.com" class="mt-3 inline-block btn btn-primary">Request info</a>
       </div>
       <div class="flex justify-end items-center order-1 md:order-2">
         <img src="~/assets/img/howdy-x3.png" alt="Howdy" class="lg:w-9/12" />
