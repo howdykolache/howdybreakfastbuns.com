@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       showMenu: true,
-      isMobile: screen.width <= 768
+      isMobile: screen.width < 768
     }
   },
   methods: {
