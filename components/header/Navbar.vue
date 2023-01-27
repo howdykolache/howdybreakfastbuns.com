@@ -27,7 +27,8 @@
 export default {
   data() {
     return {
-      showMenu: true
+      showMenu: true,
+      isMobile: screen.width <= 768
     }
   },
   methods: {
@@ -37,12 +38,12 @@ export default {
   },
   created(){
     // Initially, hide the menu if it’s a tablet or smaller
-    if(screen.width <= 768) this.showMenu = false
+    if(this.isMobile) this.showMenu = false
   },
   watch: {
     $route(to, from) {
       // On tablet on below, hide the menu on route change (In case it’s open)
-      if(screen.width <= 768) this.showMenu = false
+      if(this.isMobile) this.showMenu = false
     },
   },
 }
