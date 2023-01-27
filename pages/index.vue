@@ -84,7 +84,7 @@
           <li>👉 Beautiful packaging for transport</li>
           <li>👉 Hand crafted with love in Chicago! ❤️</li>
         </ul>
-        <a href="" class="mt-8 inline-block btn btn-primary">Order online</a>
+        <nuxt-link to="/order" class="mt-8 inline-block btn btn-primary">Order online</nuxt-link>
       </div>
     </section>
   </div>
