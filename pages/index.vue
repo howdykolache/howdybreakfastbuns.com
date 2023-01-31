@@ -26,7 +26,7 @@
           co-working spaces.
         </p>
         <p>Your coworkers will thank you!</p>
-        <a href="mailto:howdy@howdybreakfastbuns.com" class="mt-3 inline-block btn btn-primary">Request info</a>
+        <nuxt-link to='/order'  class="mt-3 inline-block btn btn-primary">ORDER NOW</nuxt-link>
       </div>
       <div class="flex justify-end items-center order-1 md:order-2">
         <img src="~/assets/img/howdy-x3.png" alt="Howdy" class="lg:w-9/12" />
@@ -39,24 +39,28 @@
       >
         <a
           href="https://www.nbcchicago.com/entertainment/chicago-today/howdy-kolache-you-can-finally-try-these-savory-texas-czech-style-kolaches-in-chicago/2767128/"
+          target="_blank"
         >
           <img src="~/assets/img/nbc.png" class="w-24 mx-auto lg:w-32" />
         </a>
         <a
           class="md:mt-0"
           href="https://chicago.eater.com/2022/10/18/23409216/howdy-kolache-texas-czech-pastry-fulton-market-chicago"
+          target="_blank"
         >
           <img src="~/assets/img/eater.png" class="w-20 mx-auto lg:w-32" />
         </a>
         <a
           class=" w-full md:mt-0"
           href="https://www.chicagomag.com/chicago-magazine/november-2021/howdy-kolache-bring-a-texas-tradition-north/"
+          target="_blank"
         >
           <img src="~/assets/img/chicago-mag.png" class="w-28 mx-auto lg:w-48" />
         </a>
         <a
           class="md:mt-0"
           href="https://abc7chicago.com/howdy-kolache-chicago-bakery-west-loop-restaurants/11224703/"
+          target="_blank"
         >
           <img src="~/assets/img/abc.png" class="w-20 mx-auto lg:w-28" />
         </a>
