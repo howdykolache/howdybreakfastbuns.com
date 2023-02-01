@@ -43,6 +43,7 @@ const createSession = async (order) => {
       line_items,
       metadata,
       payment_intent_data: {
+        description: 'Direct order via howdybreakfastbuns.com',
         metadata
       },
       mode: "payment",
