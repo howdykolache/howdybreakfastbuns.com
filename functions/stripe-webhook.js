@@ -37,6 +37,13 @@ exports.handler = async (event, context) => {
 
   const orderData = stripeEvent.data.object.metadata;
 
+  if (Object.keys(orderData).length === 0) {
+    return {
+      statusCode: 200,
+      body: `Unrelated payment`,
+    };
+  }
+
   const { subject, body } = buildEmail(orderData);
 
   // Send notification email to ourselves 
