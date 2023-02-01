@@ -4,8 +4,7 @@
     <div class="lg:flex justify-between mt-4 lg:gap-x-20 lg:mt-16">
       <div class="w-full lg:w-7/12">
         <p>
-          Would you like to use one of our standard recommended breakfast
-          assortments or choose your own flavors (by the dozen)
+          Select one of our standard breakfast bun assortments!
         </p>
         <div>
           <RadioButton

@@ -83,12 +83,16 @@ export default {
         },
         "orange juice": {
           name: "Orange juice ($3.99)",
+          description:
+            "Single serving. The perfect tangy, vitamin C rich complement to a Howdy breakfast bun.",
           value: 0,
           priceInCents: 399,
           id: 4
         },
         "topo chico": {
           name: "Topo chico ($3.99)",
+          description:
+            "Single serving. The one, the only! Topo Chico is sparkling mineral water sourced and bottled in Monterrey, Mexico since 1895.",
           value: 0,
           priceInCents: 399,
           id: 5
