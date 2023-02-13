@@ -16,6 +16,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'facebook-domain-verification', content: '2ij40knbmlnr9v3u80rbzu2etzrqip' },
       { hid: 'description', name: 'description', content: 'Stuffed breakfast sandwiches perfect for offices or events. No mess, fun and delicious!' },
       { name: 'format-detection', content: 'telephone=no' },
       { hid: 'og:title', name: 'og:title', content: 'Howdy Breakfast Buns' },
