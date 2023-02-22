@@ -24,7 +24,6 @@
 
 <script>
 import moment from 'moment'
-import sendEmail from '../helpers/email'
 import { persistentformData } from '@/helpers/order-form-persistence'
 
 export default {
@@ -41,38 +40,6 @@ export default {
 
       return `${this.order.deliveryTime} on ${date}`
     },
-    emailSubject(){
-      return `[Howdy Breakfast Buns] A new order was placed by ${this.order.name}`
-    },
-    emailBody(){
-      let bodyHtml = `
-      <h4>Order information:</h4>
-      `
-
-      for (let key in this.order) {
-        let value = this.order[key]
-
-        if (key === 'orderCostInCents') {
-          key = 'total'
-          if (parseInt(value) > 0) value = parseInt(value) /100
-        }        
-        
-        if (key === 'tipInCents') {
-          key = 'tip'
-          if (parseInt(value) > 0) value = parseInt(value) /100
-        }
-
-        bodyHtml += `
-        <span>
-          <strong>${key}: </strong>
-          <span>${value} </span>
-        </span>
-        <br>
-        `
-      }
-
-      return bodyHtml
-    }
   },
   methods: {
     async getCheckoutSessionData(){
@@ -82,7 +49,7 @@ export default {
         const res =await fetch(`/.netlify/functions/get-checkout-session-metadata?session_id=${this.sessionId}`)
         if (res.status === 200) {
           this.order = await res.json()
-          sendEmail(this.emailSubject, this.emailBody)
+
           persistentformData.clear()
         }
       } catch (error) {
