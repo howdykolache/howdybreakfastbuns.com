@@ -44,12 +44,7 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const { subject, body } = buildEmail(orderData);
-
-  // Send notification email to ourselves 
-  await sendEmailTo(process.env.MAIL_NOTIFICATION, subject, body);
-  // To the user
-  await sendEmailTo(orderData.email, subject, body);
+  await sendOrderConfimationEmail(orderData);
 
   return {
     statusCode: 200,
@@ -57,7 +52,7 @@ exports.handler = async (event, context) => {
   };
 };
 
-const buildEmail = (data) => {
+const sendOrderConfimationEmail = async (data) => {
   // Date & time
   const formattedDate = moment(data.date, "MM/DD/YYYY").format("MM/DD");
   const dateTime = `${data.deliveryTime} on ${formattedDate}`;
@@ -110,10 +105,10 @@ const buildEmail = (data) => {
     Have an amazing day! 😊😊😊
     `;
 
-  return {
-    subject,
-    body,
-  };
+  // Send notification email to ourselves 
+  await sendEmailTo(process.env.MAIL_NOTIFICATION, subject, body);
+  // To the user
+  await sendEmailTo(data.email, subject, body);
 };
 
 const sendEmailTo = async (email, subject, body) => {
