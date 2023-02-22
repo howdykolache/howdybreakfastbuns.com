@@ -10,6 +10,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/gtm": "^2.4.0",
     "@sum.cumo/vue-datepicker": "^4.0.0",
     "core-js": "^3.19.3",
     "moment": "^2.29.4",
