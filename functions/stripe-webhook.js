@@ -77,6 +77,16 @@ const sendOrderConfimationEmail = async (data) => {
   data.addons.split(',').forEach(addon => {
     lineItems += `<br>${addon.trim()}`
   });
+  // Tip
+  let tip = ''
+  if (data.tipInCents && parseInt(data.tipInCents) > 0) {
+    const formattedTip = (parseInt(data.tipInCents) /100).toLocaleString()
+
+     tip = `<br>
+     <strong>Tip:</strong><br>
+     $${formattedTip}
+     <br>`
+  }
 
   const subject = `Howdy Online Order Confirmation: ${data.name} on ${formattedDate}`;
 
@@ -101,6 +111,7 @@ const sendOrderConfimationEmail = async (data) => {
     ${addressAndNotes}
     <strong>Order Details:</strong><br>
     ${lineItems}
+    ${tip}
     <br><br>
     Have an amazing day! 😊😊😊
     `;
