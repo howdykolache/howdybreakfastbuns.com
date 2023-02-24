@@ -123,6 +123,11 @@ export default {
             from: new Date(2022, 11, 21),
             to: new Date(2023, 0, 4),
           },
+          {
+            // howdy winter holiday
+            from: new Date(2023, 2, 8),
+            to: new Date(2023, 2, 11),
+          },
         ],
         dates: [
           new Date(2023, 0, 16), // MLK day
