@@ -82,7 +82,7 @@ const sendOrderConfimationEmail = async (data) => {
   if (data.tipInCents && parseInt(data.tipInCents) > 0) {
     const formattedTip = (parseInt(data.tipInCents) /100).toLocaleString()
 
-     tip = `<br>
+     tip = `<br><br>
      <strong>Tip:</strong><br>
      $${formattedTip}
      <br>`
