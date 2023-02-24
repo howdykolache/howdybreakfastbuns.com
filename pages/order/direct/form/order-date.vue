@@ -124,7 +124,8 @@ export default {
             to: new Date(2023, 0, 4),
           },
           {
-            // howdy winter holiday
+            // howdy visits phoenix
+            // note to future self. If you want to disable 3/9, enter 2023,2,8. (0 indexed on month. unclear on date)
             from: new Date(2023, 2, 8),
             to: new Date(2023, 2, 11),
           },
