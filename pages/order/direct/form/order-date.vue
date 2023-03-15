@@ -123,6 +123,12 @@ export default {
             from: new Date(2022, 11, 21),
             to: new Date(2023, 0, 4),
           },
+          {
+            // howdy visits phoenix
+            // note to future self. If you want to disable 3/9, enter 2023,2,8. (0 indexed on month. unclear on date)
+            from: new Date(2023, 2, 8),
+            to: new Date(2023, 2, 11),
+          },
         ],
         dates: [
           new Date(2023, 0, 16), // MLK day
