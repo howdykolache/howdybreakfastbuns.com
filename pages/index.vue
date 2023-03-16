@@ -1,37 +1,5 @@
 <template>
   <div>
-    <div class="sticky-bar mt-12"></div>
-    <section
-      class="container mx-auto py-4 mt-12 flex flex-col md:flex-row items-start"
-    >
-      <div class="md:w-1/2 text-center md:text-left order-2 md:order-1">
-        <h2 class="text-3xl font-bold leading-snug mt-6 md:m-0">
-          THE BEST BREAKFAST <br />
-          FOR YOUR WORKPLACE
-        </h2>
-        <p>Does your company order breakfast?</p>
-
-        <p>Is it *AMAZING*? 🤔</p>
-
-        <p><strong>Howdy Breakfast Buns</strong> are!</p>
-
-        <p>
-          We work with companies in Chicago to give them a savory, nourishing,
-          and most importantly
-          <span class="text-highlight">fun and delicious</span> breakfast for
-          their employees.
-        </p>
-        <p>
-          Clients include trading companies, law firms, tech companies and
-          co-working spaces.
-        </p>
-        <p>Your coworkers will thank you!</p>
-        <nuxt-link to='/order'  class="mt-3 inline-block btn btn-primary">ORDER NOW</nuxt-link>
-      </div>
-      <div class="flex justify-end items-center order-1 md:order-2">
-        <img src="~/assets/img/howdy-x3.png" alt="Howdy" class="lg:w-9/12" />
-      </div>
-    </section>
     <section class="container mx-auto mt-20 flex flex-col items-center">
       <span class="text-gray-500 uppercase">as seen in</span>
       <div
@@ -66,6 +34,39 @@
         </a>
       </div>
     </section>
+
+    <section
+      class="container mx-auto py-4 mt-12 flex flex-col md:flex-row items-start"
+    >
+      <div class="md:w-1/2 text-center md:text-left order-2 md:order-1">
+        <h2 class="text-3xl font-bold leading-snug mt-6 md:m-0">
+          THE BEST BREAKFAST <br />
+          FOR YOUR WORKPLACE
+        </h2>
+        <p>Does your company order breakfast?</p>
+
+        <p>Is it *AMAZING*? 🤔</p>
+
+        <p><strong>Howdy Breakfast Buns</strong> are!</p>
+
+        <p>
+          We work with companies in Chicago to give them a savory, nourishing,
+          and most importantly
+          <span class="text-highlight">fun and delicious</span> breakfast for
+          their employees.
+        </p>
+        <p>
+          Clients include trading companies, law firms, tech companies and
+          co-working spaces.
+        </p>
+        <p>Your coworkers will thank you!</p>
+        <nuxt-link to='/order'  class="mt-3 inline-block btn btn-primary">ORDER NOW</nuxt-link>
+      </div>
+      <div class="flex justify-end items-center order-1 md:order-2">
+        <img src="~/assets/img/index/strawberry.jpg" alt="Strawberries & KREAM" class="lg:w-9/12" />
+      </div>
+    </section>
+
     <section
       class="container mx-auto mt-20 flex flex-col md:flex-row justify-between items-start"
     >
