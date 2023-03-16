@@ -6,13 +6,10 @@
     <section class="mt-3 gap-x-20 lg:flex lg:mt-10">
       <div class="text-xl lg:w-6/12">
         <p>
-          Order breakfast buns weekdays 7:30am-1:30pm via Toast, ezCater, or
-          through us directly.
-        </p>
+          Order delicious savory or sweet breakfast from Howdy weekdays 7:30am-12:30pm via Toast or ezCater!</p>
         <section
           class="links mt-10 grid grid-cols-2 grid-rows-2 gap-4"
         >
-          <nuxt-link class="order-button directly" to="/order/direct">Order Directly</nuxt-link>
           <a
             class="order-button toasttab"
             href="https://www.toasttab.com/howdybreakfastbuns/v3"
