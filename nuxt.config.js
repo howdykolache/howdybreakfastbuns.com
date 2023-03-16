@@ -4,7 +4,7 @@ export default {
   ssr: false,
 
   env: {
-    STRIPE_SECRET_API_KEY: process.env.STRIPE_SECRET_API_KEY,
+    //
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
