@@ -12,7 +12,7 @@
         >
           <a
             class="order-button toasttab"
-            href="https://www.toasttab.com/howdybreakfastbuns/v3"
+            href="https://www.toasttab.com/howdy/"
             target="_blank"
           >
             <img src="@/static/toasttab.png" class="max-h-6" />
